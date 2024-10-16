@@ -1,0 +1,110 @@
+<div class="homepage-container">
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="https://media.istockphoto.com/id/1384532150/vector/recycle-symbol-inside-circle-with-leaves-zero-waste-concept.jpg?s=2048x2048&w=is&k=20&c=8c-KEoAaBI32289PvLtk8DLI7imEZKaOXl4_S9s3fqo=" alt="Green Tech Logo">
+      <span>GREEN TECH</span>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#">Manage</a></li>
+      <li><a href="#">History</a></li>
+      <li><a href="#">Schedule</a></li>
+      <li><a href="#">Report Issue</a></li>
+      <li><a href="#">Generate Report</a></li>
+      <li><a routerLink="/user-login">Login</a></li>
+      <li><a routerLink="/user-register">Register</a></li>
+
+      <!-- Notification Bell Icon -->
+      <li>
+        <div class="notification-icon" (click)="toggleNotifications()">
+          <img src="https://icon-library.com/images/notification-bell-icon/notification-bell-icon-19.jpg" alt="Notifications">
+          <!-- Dynamic notification count -->
+          <span class="notification-count" *ngIf="unreadCount > 0">{{ unreadCount }}</span> <!-- Show unread count dynamically -->
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Notification Popup (Initially hidden) -->
+  <div class="notification-popup" *ngIf="showNotifications">
+    <div class="notification-header">
+      <h3>Notifications</h3>
+      <button (click)="markAllAsRead()">Mark all as read</button>
+    </div>
+    <div class="notification-content">
+      <!--Static Notifications-->
+      <p>🔔 You have a new update!</p>
+      <p>🔔 Important Community Announcements!</p>
+      <!-- Dynamically display notifications using *ngFor -->
+      <p *ngFor="let notification of notifications">🔔 {{ notification }}</p>
+    </div>
+  </div>
+
+  <!-- Full Background Image Section -->
+  <div class="full-background">
+    <div class="overlay-text">
+      <h1>About Us</h1>
+      <p>
+        Welcome to Green Tech! We aim to revolutionize the recycling industry with eco-friendly solutions. 
+        Our mission is to improve the efficiency of waste management by developing a system that allows community members to easily schedule waste pickups and report issues.
+      </p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <footer class="footer-container">
+      <!-- Subscription Section -->
+      <div class="subscription-container">
+        <div class="subscription-box">
+          <span>📧 GIVE US YOUR EMAIL FOR MORE NEWS, DEALS, AND INSIGHTS</span>
+          <form class="subscription-form">
+            <input type="email" placeholder="YOUR EMAIL ADDRESS" />
+            <button type="submit">SUBSCRIBE</button>
+          </form>
+        </div>
+      </div>
+    
+      <!-- Footer Links and Contact Info -->
+      <div class="footer-content">
+        <!-- Footer Links -->
+        <div class="footer-links">
+          <div class="footer-section">
+            <h3>ABOUT US</h3>
+            <p>Project aims to improve the efficiency of waste management</p>
+          </div>
+          <div class="footer-section">
+            <h3>COMPANY</h3>
+            <a href="#">About us</a>
+            <a href="#">Report</a>
+          </div>
+          <div class="footer-section">
+            <h3>SERVICES</h3>
+            <a href="#">Waste Management</a>
+            <a href="#">Online Scheduling</a>
+          </div>
+        </div>
+    
+        <!-- Quick Contact -->
+        <div class="quick-contact">
+          <h3>QUICK CONTACT</h3>
+          <p>If you have any questions or help, feel free to contact our team.</p>
+          <div>
+            <a href="mailto:greentech1@gmail.com">📧 greentech1.mail.com</a>
+          </div>
+          <div>
+            <a href="tel:+6011234567890">📞 011-234567890</a>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Social Media Icons -->
+      <div class="social-media">
+        <a href="#"><img src="https://e7.pngegg.com/pngimages/174/233/png-clipart-computer-icons-facebook-inc-social-media-logo-facebook-rectangle-logo-thumbnail.png" alt="Facebook"></a>
+        <a href="#"><img src="https://www.citypng.com/public/uploads/preview/hd-twitter-x-new-logo-png-735811696672788haniphkh2j.png" alt="Twitter"></a>
+        <a href="#"><img src="https://www.citypng.com/public/uploads/preview/hd-official-outline-instagram-ig-logo-icon-png-701751694786948nms5td2hyk.png" alt="Instagram"></a>
+      </div>
+    </footer>
+  </footer>
+</div>

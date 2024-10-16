@@ -1,0 +1,22 @@
+<div class="register-container">
+  <div class="form-container">
+    <h2> USER REGISTRATION </h2>
+    <p> WELCOME TO GREENTECH </p>
+    <p> Here you could organise your daily wastes systematically. </p>
+    <form (ngSubmit)="onRegister()">
+      <input type="text" placeholder="First Name" [(ngModel)]="firstName" name="firstName" required />
+      <input type="text" placeholder="Last Name" [(ngModel)]="lastName" name="lastName" required />
+      <input type="email" class="full-width" placeholder="E-Mail" [(ngModel)]="email" name="email" required />
+      <input type="text" class="full-width" placeholder="Address" [(ngModel)]="address" name="address" required />
+      <input type="text" placeholder="Community Name" [(ngModel)]="communityName" name="communityName" required />
+      <input type="text" placeholder="Phone Number" [(ngModel)]="phoneNumber" name="phoneNumber" required />
+      <input type="password" class="full-width" placeholder="Password" [(ngModel)]="password" name="password" required />
+      <button type="submit">GET STARTED</button>
+    </form>
+    <a routerLink="/role-selection" class="role-btn">Proceed to Role Selection</a>
+
+    <!-- Add Back to Home button -->
+    <button (click)="goHome()" class="home-btn">Back to Home</button> <!-- New button to navigate to Home -->
+  </div>
+</div>
+

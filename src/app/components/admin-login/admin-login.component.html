@@ -1,0 +1,22 @@
+<div class="login-container">
+  <div class="form-container">
+    <h2> ADMIN LOGIN </h2>
+    <p> WELCOME BACK </p>
+    <p> PLEASE ENTER YOUR DETAILS TO LOG IN! </p>
+    
+    <!-- Form with ngSubmit event -->
+    <form (ngSubmit)="onLogin()">
+      <input type="email" placeholder="E-mail" required [(ngModel)]="email" name="email" />
+      <input type="password" placeholder="Password" required [(ngModel)]="password" name="password" />
+      <button type="submit">Get Started</button>
+    </form>
+
+    <a routerLink="/role-selection" class="role-btn">Proceed to Role Selection</a>
+
+
+    <!-- Add button to navigate to Home page -->
+    <button (click)="goHome()" class="home-btn">Back to Home</button>
+  </div>
+</div>
+
+

@@ -1,0 +1,17 @@
+<div class="login-container">
+  <div class="form-container">
+    <h2> USER LOGIN </h2>
+    <p> WELCOME BACK! </p>
+    <p> PLEASE ENTER YOUR DETAILS TO LOGIN! </p>
+    <form (ngSubmit)="onLogin()">
+      <input type="email" placeholder="E-mail" [(ngModel)]="email" name="email" required />
+      <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
+      <button type="submit">Get Started</button>
+    </form>
+    <a routerLink="/role-selection" class="role-btn">Proceed to Role Selection</a>
+
+    <!-- Add Back to Home button -->
+    <button (click)="goHome()" class="home-btn">Back to Home</button>
+  </div>
+</div>
+
