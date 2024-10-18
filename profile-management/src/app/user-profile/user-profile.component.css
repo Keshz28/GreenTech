@@ -1,0 +1,127 @@
+.profile-container {
+    width: 600px;
+    background-color: #E7F3E9;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    margin: 0 auto; /* 중앙 정렬 */
+    margin-top: 50px; /* 상단 여백 추가 */
+  }
+  
+  .header {
+    background-color: #4B8541;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+  }
+  
+  .profile-content {
+    padding: 30px;
+    text-align: center;
+    background-color: #FFFFFF;
+  }
+  
+  .profile-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    object-fit: cover;
+  }
+  
+  .profile-info {
+    color: #333;
+  }
+  
+  .profile-info h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+  
+  .profile-info p {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  .community {
+    background-color: #A9D1B8;
+    padding: 15px;
+    font-size: 18px;
+    text-align: center;
+    color: #333;
+  }
+  
+  .footer {
+    background-color: #4B8541;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .footer p {
+    margin-left: 20px;
+    font-size: 16px;
+  }
+  
+  .quick-contact {
+    margin-right: 20px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .quick-contact img {
+    margin-right: 10px;
+  }
+  
+  .back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .back-button:hover {
+    color: #ccc;
+  }
+  
+  /* Edit and Save button styles */
+  .edit-button, .save-button {
+    background-color: #4B8541; /* Green color */
+    color: white;
+    border: none;
+    border-radius: 20px; /* Rounded corners */
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .edit-button:hover, .save-button:hover {
+    background-color: #3c6c3a; /* Darker green on hover */
+  }
+  
+  /* Edit profile form styles */
+  .edit-profile-form {
+    display: flex;
+    flex-direction: column; /* 세로 정렬 */
+    align-items: center;
+  }
+  
+  /* Input styles for edit mode */
+  .edit-profile-form input {
+    font-size: 18px; /* Increase font size to match other text */
+    padding: 10px; /* Add padding for better appearance */
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 5px; /* Rounded corners for input */
+    width: 100%; /* Make input full width */
+    max-width: 300px; /* Limit max width */
+    margin-bottom: 15px; /* Space between inputs */
+  }
+  

@@ -1,0 +1,45 @@
+<div class="profile-container">
+    <div class="header">
+      <a href="#" class="back-button">&larr;</a>
+      ADMIN PROFILE
+    </div>
+  
+    <div class="profile-content">
+      <img src="https://via.placeholder.com/150" alt="Admin Image" class="profile-image">
+      <div *ngIf="!editMode" class="profile-info">
+        <h1>{{ adminProfile.name }}</h1>
+        <p>Email: {{ adminProfile.email }}</p>
+        <p>Phone Number: {{ adminProfile.phone }}</p>
+      </div>
+  
+      <!-- Edit form -->
+      <div *ngIf="editMode" class="edit-profile-form">
+        <label for="name">Name:</label>
+        <input id="name" [(ngModel)]="adminProfile.name" placeholder="Enter Name">
+      
+        <label for="email">Email:</label>
+        <input id="email" [(ngModel)]="adminProfile.email" placeholder="Enter Email">
+      
+        <label for="phone">Phone Number:</label>
+        <input id="phone" [(ngModel)]="adminProfile.phone" placeholder="Enter Phone Number">
+      
+        <button class="save-button" (click)="saveProfile()">Save</button>
+      </div>
+  
+      <!-- Edit button -->
+      <button class="edit-button" *ngIf="!editMode" (click)="editProfile()">Edit Profile</button>
+    </div>
+  
+    <div class="community">
+      Community Name: Apartment Damai, Subang Bestari
+    </div>
+  
+    <div class="footer">
+      <p>Quick Contact</p>
+      <div class="quick-contact">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/email-open.png" alt="Email Icon" width="20">
+        greentech1(a)gmail.com
+      </div>
+    </div>
+  </div>
+  
