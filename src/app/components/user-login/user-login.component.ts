@@ -13,7 +13,7 @@ import { UserRegisterComponent } from '../user-register/user-register.component'
   standalone: true,
   imports: [RouterModule, AdminLoginComponent, RoleSelectionComponent, FormsModule, AdminRegisterComponent, UserRegisterComponent],
   templateUrl: './user-login.component.html',
-  styleUrl: './user-login.component.css'
+  styleUrls: ['./user-login.component.css']
 })
 
 export class UserLoginComponent {
@@ -24,6 +24,7 @@ export class UserLoginComponent {
     constructor(private http: HttpClient, private router: Router) {}
   
     onLogin() {
+      if (this.email && this.password){
       const loginData = { email: this.email, password: this.password };
       
       // Send POST request to the backend
@@ -31,12 +32,21 @@ export class UserLoginComponent {
         .subscribe(response => {
           console.log(response.message);
           if (response.userId) {
+            //Redirect to dashboard after successfull login
             this.router.navigate(['/role-selection']);
+          } else { 
+            alert('Login Failed!!! Please Check Your Credentials!')
           }
         }, error => {
           console.error('Login failed:', error);
+          alert('Login Failed Due To Server Error!!!')
         });
+      }else{
+        alert('Please Enter Both Email and Password!')
+      }
     }
+
+    
 
      // Method to navigate back to the homepage
     goHome() {

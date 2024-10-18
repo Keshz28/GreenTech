@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [RouterModule, RoleSelectionComponent, AdminLoginComponent, UserLoginComponent, AdminRegisterComponent, FormsModule],
   templateUrl: './user-register.component.html',
-  styleUrl: './user-register.component.css'
+  styleUrls: ['./user-register.component.css']
 })
 export class UserRegisterComponent {
  
@@ -45,9 +45,12 @@ export class UserRegisterComponent {
           // Redirect to another page on successful registration
           if (response.userId) {
             this.router.navigate(['/role-selection']);
+          } else {
+            alert ('Registration Failed!!! An Accounting Error Had Been Occured!')
           }
         }, error => {
           console.error('Registration failed:', error);
+          alert ('Login Failed Due To Server Error!!!')
         });
     }
 

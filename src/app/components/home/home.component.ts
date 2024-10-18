@@ -6,11 +6,14 @@ import { UserLoginComponent } from '../user-login/user-login.component';
 import { RoleSelectionComponent } from '../role-selection/role-selection.component';
 import { NotificationService, Notification } from '../../services/notification.service'; // Import Notification interface
 import { UserRegisterComponent } from '../user-register/user-register.component';
+import { ReportsComponent } from '../reports/reports.component';
+import { AdminRegisterComponent } from '../admin-register/admin-register.component';
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterModule, CommonModule, AdminLoginComponent, UserLoginComponent, RoleSelectionComponent, UserRegisterComponent],
+  imports: [RouterModule, CommonModule, AdminLoginComponent, UserLoginComponent, RoleSelectionComponent, ReportsComponent, UserRegisterComponent, AdminRegisterComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -62,5 +65,7 @@ export class HomeComponent implements OnInit {
       this.showNotifications = false;
     }
   }
+
+  
 }
 

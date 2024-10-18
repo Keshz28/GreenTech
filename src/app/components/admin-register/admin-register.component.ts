@@ -43,10 +43,14 @@ export class AdminRegisterComponent {
         if (response.adminId) {
           // Redirect to some other page on successful registration
           this.router.navigate(['/admin-dashboard']);  // Adjust the route as needed
+        } else {
+          alert('Registration Failed!!! An Accounting Error Had Been Occured!')
         }
       }, error => {
         console.error('Registration failed:', error);
+        alert ('Login Failed Due To Server Error!!!')
       });
+
   }
 
   // Method to navigate back to the homepage

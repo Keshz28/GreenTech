@@ -6,7 +6,9 @@ import { RouterModule } from '@angular/router';
   templateUrl: './app.component.html', 
   styleUrls: ['./app.component.css'],
   standalone: true,
-  imports: [RouterModule], // Import RouterModule here
+  imports: [RouterModule]
+ 
+   // Import RouterModule here
 })
 export class AppComponent {
   title = 'waste-management-system';

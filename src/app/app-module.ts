@@ -12,6 +12,7 @@ import { AdminLoginComponent } from './components/admin-login/admin-login.compon
 import { HomeComponent } from './components/home/home.component';
 import { AdminRegisterComponent } from './components/admin-register/admin-register.component';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
+import { ReportsComponent } from './components/reports/reports.component';
 
 // Define the routes for your app
 const appRoutes: Routes = [
@@ -20,11 +21,13 @@ const appRoutes: Routes = [
   { path: 'role-selection', component: RoleSelectionComponent }, // Route for role selection
   { path: 'admin-login', component: AdminLoginComponent }, // Admin login route
   { path: 'admin-register', component: AdminRegisterComponent},
-  { path: 'user-register', component: UserRegisterComponent}
+  { path: 'user-register', component: UserRegisterComponent},
+  { path: 'reports', component: ReportsComponent}
 ];
 
 @NgModule({
   declarations: [
+    
    
   ],
   imports: [

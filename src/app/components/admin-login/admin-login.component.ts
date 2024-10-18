@@ -34,14 +34,14 @@ export class AdminLoginComponent {
             // Redirect to dashboard on successful login
             this.router.navigate(['/admin-dashboard']);
           } else {
-            alert('Login failed. Please check your credentials.');
+            alert('Login Failed!!! Please Check Your Credentials!');
           }
         }, error => {
           console.error('Login failed:', error);
-          alert('Login failed due to server error.');
+          alert('Login Failed Due To Server Errror!!!');
         });
     } else {
-      alert('Please enter both email and password!');
+      alert('Please Enter Both Email and Password!');
     }
   }
 
