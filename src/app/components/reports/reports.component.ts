@@ -35,4 +35,7 @@ export class ReportsComponent {
   goBackHome(): void {
     this.router.navigate(['/']);
   }
+
+  // Add this line to define pickupHistory
+  pickupHistory: any[] = []; // Initialize with an empty array or appropriate type
 }

@@ -4,7 +4,6 @@ import { RoleSelectionComponent } from '../role-selection/role-selection.compone
 import { AdminLoginComponent } from '../admin-login/admin-login.component';
 import { UserLoginComponent } from '../user-login/user-login.component';
 import { AdminRegisterComponent } from '../admin-register/admin-register.component';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NotificationService } from '../../services/notification.service';
@@ -28,9 +27,8 @@ export class UserRegisterComponent {
     password: string = '';
   
     constructor(
-      private http: HttpClient, 
       private router: Router,
-      private notificationService: NotificationService //Inject NotificationService
+      private notificationService: NotificationService
     ) {}
   
     onRegister() {
@@ -44,25 +42,11 @@ export class UserRegisterComponent {
         password: this.password
       };
 
+      // Store user data in local storage
       localStorage.setItem('user', JSON.stringify(registrationData));
-  
-      this.http.post<{ message: string; userId?: string }>('http://localhost:3000/api/register', registrationData)
-        .subscribe(response => {
-          console.log(response.message);
-          // Redirect to another page on successful registration
-          if (response.userId) {
-            this.router.navigate(['/role-selection']);
-          } else {
-              const errorMsg = 'Registration Failed!!! An Accounting Error Had Been Occurred!';
-              alert(errorMsg);
-              this.notificationService.addNotification(errorMsg);  // Add alert to notification service
-          }
-        }, error => {
-          const serverError = 'Registration Failed Due To Server Error!!!';
-          console.error('Registration failed:', error);
-          alert(serverError);
-          this.notificationService.addNotification(serverError);  // Add server error to notification service
-        });
+
+      // Redirect to another page on successful registration
+      this.router.navigate(['/role-selection']);
     }
 
     // Method to navigate back to the homepage
