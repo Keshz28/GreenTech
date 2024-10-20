@@ -15,4 +15,5 @@ export const routes: Routes = [
     {path: 'admin-register', component: AdminRegisterComponent},
     {path: 'role-selection', component: RoleSelectionComponent},
     {path: 'reports', component: ReportsComponent}
+   
 ];

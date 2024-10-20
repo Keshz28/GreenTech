@@ -7,6 +7,7 @@ import { AdminLoginComponent } from '../admin-login/admin-login.component';
 import { UserLoginComponent } from '../user-login/user-login.component';
 import { UserRegisterComponent } from '../user-register/user-register.component';
 import { FormsModule } from '@angular/forms';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-admin-register',
@@ -24,7 +25,11 @@ export class AdminRegisterComponent {
   phoneNumber: string = '';
   password: string = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient, 
+    private router: Router,
+    private notificationService: NotificationService
+  ) {}
 
   onRegister() {
     const adminData = {
@@ -44,11 +49,15 @@ export class AdminRegisterComponent {
           // Redirect to some other page on successful registration
           this.router.navigate(['/admin-dashboard']);  // Adjust the route as needed
         } else {
-          alert('Registration Failed!!! An Accounting Error Had Been Occured!')
+          const failMsg = 'Registration Failed!!! An Accounting Error Had Been Occurred!';
+          alert(failMsg);
+          this.notificationService.addNotification(failMsg);  // Add alert to notification service
         }
       }, error => {
+        const serverErrorMsg = 'Registration Failed Due To Server Error!!!';
         console.error('Registration failed:', error);
-        alert ('Login Failed Due To Server Error!!!')
+        alert(serverErrorMsg);
+        this.notificationService.addNotification(serverErrorMsg);  // Add server error to notification service
       });
 
   }

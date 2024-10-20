@@ -49,6 +49,23 @@
             <td>{{ pickup.name }}</td>
             <td>{{ pickup.community }}</td>
             <td>{{ pickup.wasteType }}</td>
+          <!-- Static Entries -->
+          <tr>
+            <td>John Doe</td>
+            <td>Subang Bestari</td>
+            <td>Plastic</td>
+          </tr>
+          <tr>
+            <td>Jane Smith</td>
+            <td>Subang Bestari</td>
+            <td>Metal</td>
+          </tr>
+
+          <!-- Dynamic Entries -->
+          <tr *ngFor="let report of submittedReports">
+            <td>{{ report.name }}</td>
+            <td>{{ report.community }}</td>
+            <td>{{ report.wasteType }}</td>
           </tr>
         </tbody>
       </table>
@@ -73,4 +90,4 @@
   <div class="back-button-container">
     <button (click)="goBackHome()" class="back-home-btn">Back to Home</button>
   </div>
-</div>
+

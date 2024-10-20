@@ -17,14 +17,19 @@ export class ReportsComponent {
   public topWasteType: string = 'Plastic';
   public topCommunity: string = 'Subang Bestari';
 
-  // Data for Pickup History table
-  public pickupHistory = [
+  // Static Entries for Pickup History table
+  public staticEntries = [
     { name: 'John Doe', community: 'Subang Bestari', wasteType: 'Plastic' },
-    { name: 'Jane Smith', community: 'Subang Bestari', wasteType: 'Metal' },
-    { name: 'Mark Johnson', community: 'Subang Bestari', wasteType: 'Glass' },
-    { name: 'Anna Williams', community: 'Subang Bestari', wasteType: 'Paper' },
-    { name: 'Paul Adams', community: 'Subang Bestari', wasteType: 'Others' }
+    { name: 'Jane Smith', community: 'Subang Bestari', wasteType: 'Metal' }
   ];
+
+  // Placeholder for dynamically submitted reports
+  public submittedReports: Array<{ name: string, community: string, wasteType: string }> = [];
+
+  // Future method to add reports dynamically (we can build on this later)
+  addReport(report: { name: string, community: string, wasteType: string }) {
+    this.submittedReports.push(report);  // Add the new report dynamically
+  }
 
   // Method to navigate back to the homepage
   goBackHome(): void {

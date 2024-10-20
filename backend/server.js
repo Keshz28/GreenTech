@@ -1,7 +1,5 @@
-const app = require('./app');
-
+const app = require('./backend/models/app');
 const http = require('http');
-
 const port = process.env.PORT || 3000;
 
 app.set('port', port);

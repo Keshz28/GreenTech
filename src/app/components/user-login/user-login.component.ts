@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AdminRegisterComponent } from '../admin-register/admin-register.component';
 import { UserRegisterComponent } from '../user-register/user-register.component';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-user-login',
@@ -21,7 +22,10 @@ export class UserLoginComponent {
     email: string = '';
     password: string = '';
   
-    constructor(private http: HttpClient, private router: Router) {}
+    constructor(
+      private http: HttpClient,
+      private router: Router,
+      private notificationService: NotificationService ) {}
   
     onLogin() {
       if (this.email && this.password){
@@ -35,14 +39,26 @@ export class UserLoginComponent {
             //Redirect to dashboard after successfull login
             this.router.navigate(['/role-selection']);
           } else { 
-            alert('Login Failed!!! Please Check Your Credentials!')
+            const failMessage = 'Login Failed!!! Please Check Your Credentials!';
+            alert(failMessage);
+
+            // Add the message to the notifications
+            this.notificationService.addNotification(failMessage);
           }
         }, error => {
           console.error('Login failed:', error);
-          alert('Login Failed Due To Server Error!!!')
+          const serverErrorMessage = 'Login Failed Due To Server Error!!!';
+          alert(serverErrorMessage);
+
+           // Add the server error to the notifications
+           this.notificationService.addNotification(serverErrorMessage);
         });
       }else{
-        alert('Please Enter Both Email and Password!')
+        const missingFieldsMessage = 'Please Enter Both Email and Password!';
+        alert(missingFieldsMessage);
+
+        // Add the missing fields error to the notifications
+        this.notificationService.addNotification(missingFieldsMessage);
       }
     }
 

@@ -7,7 +7,6 @@
     </div>
 
     <ul class="nav-links">
-      <li><a href="#">Manage</a></li>
       <li><a href="#">History</a></li>
       <li><a href="#">Schedule</a></li>
       <li><a href="#">Report Issue</a></li>
@@ -15,12 +14,20 @@
       <li><a routerLink="/user-login">Login</a></li>
       <li><a routerLink="/user-register">Register</a></li>
 
-      <!-- Notification Bell Icon -->
       <li>
-        <div class="notification-icon" (click)="toggleNotifications()">
-          <img src="https://icon-library.com/images/notification-bell-icon/notification-bell-icon-19.jpg" alt="Notifications">
-          <!-- Dynamic notification count -->
-          <span class="notification-count" *ngIf="unreadCount > 0">{{ unreadCount }}</span> <!-- Show unread count dynamically -->
+        <div class="icon-container">
+          <!-- Notification Bell Icon -->
+          <div class="notification-icon" (click)="toggleNotifications()">
+            <img src="https://icon-library.com/images/notification-bell-icon/notification-bell-icon-19.jpg" alt="Notifications">
+            <!-- Dynamic notification count -->
+            <span class="notification-count" *ngIf="unreadCount > 0">{{ unreadCount }}</span>
+          </div>
+
+          <!-- User Icon -->
+          <div class="user-icon" (click)="navigateToProfile()"> <!-- Trigger navigation on click -->
+            <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="User Icon">
+            <span>Welcome! User1</span>
+          </div>
         </div>
       </li>
     </ul>
@@ -37,7 +44,10 @@
       <p>🔔 You have a new update!</p>
       <p>🔔 Important Community Announcements!</p>
       <!-- Dynamically display notifications using *ngFor -->
-      <p *ngFor="let notification of notifications">🔔 {{ notification }}</p>
+      <p *ngFor="let notification of notifications">
+        🔔 {{ notification.message }} <small>({{ notification.timestamp | date:'short' }})</small>
+      </p>
+      
     </div>
   </div>
 

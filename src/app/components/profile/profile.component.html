@@ -1,0 +1,48 @@
+<div class="profile-container">
+    <div class="profile-header">
+      <div class="profile-avatar">
+        <img src="/assets/images/user_profile.png" alt="User Avatar">
+      </div>
+  
+      <!-- Notification Bell Icon -->
+      <div class="notification-icon" (click)="toggleNotifications()">
+        <img src="https://icon-library.com/images/notification-bell-icon/notification-bell-icon-19.jpg" alt="Notifications">
+        <!-- Dynamic notification count -->
+        <span class="notification-count" *ngIf="notifications.length > 0">{{ notifications.length }}</span>
+      </div>
+    </div>
+  
+    <div class="profile-details">
+      <h2>{{user?.firstName}} {{user?.lastName}}</h2>
+      <p>{{user?.communityName}}</p>
+  
+      <div class="detail-item">
+        <span>Email: {{user?.email}}</span>
+      </div>
+      <div class="detail-item">
+        <span>Phone: {{user?.phoneNumber}}</span>
+      </div>
+      <div class="detail-item">
+        <span>Address: {{user?.address}}</span>
+      </div>
+    </div>
+  
+    <!-- Profile Actions -->
+    <div class="profile-actions">
+      <button (click)="editProfile()">Edit Profile</button>
+      <button (click)="goHome()">Back to Home</button>
+    </div>
+  
+    <!-- Notifications Popup (Initially hidden) -->
+<div class="notification-popup" *ngIf="showNotifications">
+    <div class="notification-header">
+      <h3>Notifications</h3>
+      <button (click)="toggleNotifications()">Close</button>
+    </div>
+    <div class="notification-content">
+      <p *ngFor="let notification of notifications">{{ notification.message }}</p>
+    </div>
+  </div>
+  
+  </div>
+  

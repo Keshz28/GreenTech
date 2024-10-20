@@ -7,6 +7,7 @@ import { AdminRegisterComponent } from '../admin-register/admin-register.compone
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { NotificationService } from '../../services/notification.service';
 
 
 @Component({
@@ -26,7 +27,11 @@ export class UserRegisterComponent {
     phoneNumber: string = '';
     password: string = '';
   
-    constructor(private http: HttpClient, private router: Router) {}
+    constructor(
+      private http: HttpClient, 
+      private router: Router,
+      private notificationService: NotificationService //Inject NotificationService
+    ) {}
   
     onRegister() {
       const registrationData = {
@@ -38,6 +43,8 @@ export class UserRegisterComponent {
         phoneNumber: this.phoneNumber,
         password: this.password
       };
+
+      localStorage.setItem('user', JSON.stringify(registrationData));
   
       this.http.post<{ message: string; userId?: string }>('http://localhost:3000/api/register', registrationData)
         .subscribe(response => {
@@ -46,11 +53,15 @@ export class UserRegisterComponent {
           if (response.userId) {
             this.router.navigate(['/role-selection']);
           } else {
-            alert ('Registration Failed!!! An Accounting Error Had Been Occured!')
+              const errorMsg = 'Registration Failed!!! An Accounting Error Had Been Occurred!';
+              alert(errorMsg);
+              this.notificationService.addNotification(errorMsg);  // Add alert to notification service
           }
         }, error => {
+          const serverError = 'Registration Failed Due To Server Error!!!';
           console.error('Registration failed:', error);
-          alert ('Login Failed Due To Server Error!!!')
+          alert(serverError);
+          this.notificationService.addNotification(serverError);  // Add server error to notification service
         });
     }
 
