@@ -1,0 +1,71 @@
+.main-content {
+    padding: 20px;
+    background-color: #f2f2f2;
+  }
+  
+  h2 {
+    margin-top: 20px;
+    color: #333;
+  }
+  
+  .filter-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .filter-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .filter-buttons button {
+    background-color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 12px;
+    cursor: pointer;
+  }
+  
+  .filter-buttons button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .history-list {
+    margin-top: 20px;
+  }
+  
+  .history-entry {
+    margin-bottom: 20px;
+  }
+  
+  .history-box {
+    background-color: white;
+    border-radius: 10px;
+    height: 150px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+  }
+  
+  .view-more {
+    display: block;
+    width: 150px;
+    margin: 20px auto;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #1e7d35;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .view-more:hover {
+    background-color: #145a27;
+}

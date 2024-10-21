@@ -8,6 +8,7 @@ import { UserLoginComponent } from '../user-login/user-login.component';
 import { UserRegisterComponent } from '../user-register/user-register.component';
 import { FormsModule } from '@angular/forms';
 import { NotificationService } from '../../services/notification.service';
+import { registerLocaleData } from '@angular/common';
 
 @Component({
   selector: 'app-admin-register',
@@ -41,6 +42,8 @@ export class AdminRegisterComponent {
       phoneNumber: this.phoneNumber,
       password: this.password
     };
+
+    localStorage.setItem('user', JSON.stringify(registerLocaleData));
 
     this.http.post<{ message: string; adminId?: string }>('http://localhost:3000/api/admin/register', adminData)
       .subscribe(response => {

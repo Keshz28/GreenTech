@@ -31,6 +31,8 @@ export class AdminLoginComponent {
     if (this.email && this.password) {
       const loginData = { email: this.email, password: this.password };
 
+      localStorage.setItem('user', JSON.stringify(loginData));
+
       // Send login request to the backend
       this.http.post<{ message: string; adminId?: string }>('http://localhost:3000/api/admin/login', loginData)
         .subscribe(response => {

@@ -11,7 +11,7 @@ const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',  // Add your MySQL password if you have one
-  database: 'user_profiles_db',  // Your MySQL database
+  database: 'greentech',  // Your MySQL database
 });
 
 db.connect((err) => {
@@ -28,9 +28,9 @@ app.post("/api/register", (req, res, next) => {
     const { username, email } = req.body;
     const password = hash;
 
-    const query = "INSERT INTO users (username, email, password, profile_type) VALUES (?, ?, ?, 'user')";
+    const query = "INSERT INTO users (id, name, email, phone_number, community_name, community_address, password, profile_type) VALUES (?, ?, ?, ?, ?, ?, ?, 'user')";
     
-    db.query(query, [username, email, password], (err, result) => {
+    db.query(query, [id, name, email, phone_number, community_name, community_address, password], (err, result) => {
       if (err) {
         return res.status(500).json({ message: 'User registration failed!', error: err });
       }

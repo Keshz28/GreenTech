@@ -8,12 +8,13 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NotificationService } from '../../services/notification.service';
+import { ProfileComponent } from '../profile/profile.component';
 
 
 @Component({
   selector: 'app-user-register',
   standalone: true,
-  imports: [RouterModule, RoleSelectionComponent, AdminLoginComponent, UserLoginComponent, AdminRegisterComponent, FormsModule],
+  imports: [RouterModule, RoleSelectionComponent, AdminLoginComponent, UserLoginComponent, AdminRegisterComponent, FormsModule, ProfileComponent],
   templateUrl: './user-register.component.html',
   styleUrls: ['./user-register.component.css']
 })
@@ -43,27 +44,33 @@ export class UserRegisterComponent {
         phoneNumber: this.phoneNumber,
         password: this.password
       };
-
+    
+      // Store the user data in localStorage
       localStorage.setItem('user', JSON.stringify(registrationData));
-  
-      this.http.post<{ message: string; userId?: string }>('http://localhost:3000/api/register', registrationData)
+    
+      // Send registration request to backend
+      this.http.post<{ message: string; userId?: string }>('http://localhost:3000/api/register',registrationData)
         .subscribe(response => {
-          console.log(response.message);
-          // Redirect to another page on successful registration
-          if (response.userId) {
-            this.router.navigate(['/role-selection']);
+          console.log('API Response:', response);
+    
+          // Check if the registration was successful (response contains userId)
+          if (response && response.userId) {
+            // Redirect to the profile page with updated data
+            this.router.navigate(['/profile']);
           } else {
-              const errorMsg = 'Registration Failed!!! An Accounting Error Had Been Occurred!';
-              alert(errorMsg);
-              this.notificationService.addNotification(errorMsg);  // Add alert to notification service
+            const errorMsg = 'Registration Failed! Please Check Your Details.';
+            alert(errorMsg);
+            this.notificationService.addNotification(errorMsg);  // Add alert to notifications
           }
         }, error => {
-          const serverError = 'Registration Failed Due To Server Error!!!';
+          // Handle server error
+          const serverError = 'Registration Failed Due to Server Error!!!';
           console.error('Registration failed:', error);
           alert(serverError);
-          this.notificationService.addNotification(serverError);  // Add server error to notification service
+          this.notificationService.addNotification(serverError);  // Add server error to notifications
         });
     }
+    
 
     // Method to navigate back to the homepage
     goHome() {

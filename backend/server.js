@@ -1,4 +1,4 @@
-const app = require('./backend/models/app');
+const app = require('./models/app');
 const http = require('http');
 const port = process.env.PORT || 3000;
 

@@ -8,6 +8,10 @@ import { AdminLoginComponent } from './components/admin-login/admin-login.compon
 import { AdminRegisterComponent } from './components/admin-register/admin-register.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ReportIssueComponent } from './components/report-issue/report-issue.component';
+import { HistoryComponent } from './components/history/history.component';
+import { ScheduleComponent } from './components/schedule/schedule.component';
+import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
 
 
 // Define your routes here
@@ -20,6 +24,10 @@ const routes: Routes = [
   { path: 'admin-register', component: AdminRegisterComponent},
   { path: 'reports', component: ReportsComponent},
   { path: 'profile', component: ProfileComponent},
+  { path: 'report-issue', component: ReportIssueComponent},
+  { path: 'history', component: HistoryComponent},
+  { path: 'schedule', component: ScheduleComponent},
+  { path: 'admin-profile', component: AdminProfileComponent},
 
   // Define the default route (usually home)
   { path: '', redirectTo: 'home', pathMatch: 'full' },  // Correct the redirect path to 'home'

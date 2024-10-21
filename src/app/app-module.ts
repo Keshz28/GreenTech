@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';  // RouterModule and Rou
 import { FormsModule } from '@angular/forms';
 
 
+
 // Import your standalone components directly in routes
 import { RoleSelectionComponent } from './components/role-selection/role-selection.component';
 import { UserLoginComponent } from './components/user-login/user-login.component';
@@ -16,6 +17,10 @@ import { AdminRegisterComponent } from './components/admin-register/admin-regist
 import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ReportIssueComponent } from './components/report-issue/report-issue.component';
+import { HistoryComponent } from './components/history/history.component';
+import { ScheduleComponent } from './components/schedule/schedule.component';
+import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
 
 
 
@@ -28,7 +33,11 @@ const appRoutes: Routes = [
   { path: 'admin-register', component: AdminRegisterComponent},
   { path: 'user-register', component: UserRegisterComponent},
   { path: 'reports', component: ReportsComponent},
-  { path: 'profile', component: ProfileComponent}
+  { path: 'profile', component: ProfileComponent},
+  { path: 'report-issue', component: ReportIssueComponent},
+  { path: 'history', component: HistoryComponent},
+  {path: 'schedule', component: ScheduleComponent},
+  {path: 'admin-profile', component: AdminProfileComponent}
   
 ];
 

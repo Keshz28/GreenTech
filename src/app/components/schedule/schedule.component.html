@@ -1,0 +1,64 @@
+<div class="main-content">
+  <div class="form-container">
+
+    <!-- Type Field -->
+    <div class="input-field">
+      <label for="type">Type:</label>
+      <input type="text" [(ngModel)]="type" placeholder="Enter type" />
+    </div>
+
+    <!-- Date Field -->
+    <div class="input-field">
+      <label for="date">Date:</label>
+      <input type="date" [(ngModel)]="date" placeholder="Select date" />
+    </div>
+
+    <!-- Month Field -->
+    <div class="input-field">
+      <label for="month">Month:</label>
+      <input type="text" [(ngModel)]="month" placeholder="Enter month" />
+    </div>
+
+    <!-- Time Field -->
+    <div class="input-field">
+      <label for="time">Time:</label>
+      <input type="text" [(ngModel)]="time" placeholder="Enter time" />
+    </div>
+
+    <!-- Save Button -->
+    <button (click)="addSchedule()" class="save-button">Save</button>
+
+  </div>
+
+  <!-- Schedule Table Section -->
+  <div class="schedule-list">
+    <h3>Schedules</h3>
+    
+    <!-- Display Schedules in a Table using ngFor -->
+    <table *ngIf="schedules.length > 0" class="schedule-table">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Date</th>
+          <th>Month</th>
+          <th>Time</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let schedule of schedules; let i = index">
+          <td>{{ schedule.type }}</td>
+          <td>{{ schedule.date | date:'shortDate' }}</td>
+          <td>{{ schedule.month }}</td>
+          <td>{{ schedule.time }}</td>
+          <td>
+            <button (click)="removeSchedule(i)" class="delete-button">Remove</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <!-- If no schedules exist, display a message -->
+    <p *ngIf="schedules.length === 0">No schedules added yet.</p>
+  </div>
+</div>

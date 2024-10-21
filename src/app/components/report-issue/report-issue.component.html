@@ -1,0 +1,47 @@
+<div class="full-page-wrapper">
+    <div class="report-container">
+      <h2>Report</h2>
+  
+      <form (ngSubmit)="onSubmit()">
+        <!-- Community Name Field -->
+        <div class="form-group">
+          <label for="community">Community Name</label>
+          <input type="text" id="community" [(ngModel)]="report.community" name="community" required>
+        </div>
+  
+        <!-- Issue Type Dropdown (Optional) -->
+        <div class="form-group">
+          <label for="issueType">Type of Issue (Optional)</label>
+          <select id="issueType" [(ngModel)]="report.issueType" name="issueType">
+            <option value="">Select an issue</option>
+            <option value="Missed Pickup">Missed Pickup</option>
+            <option value="Overflowing Bin">Overflowing Bin</option>
+            <option value="Illegal Waste Dumping">Illegal Waste Dumping</option>
+          </select>
+        </div>
+  
+        <!-- Description Field -->
+        <div class="form-group">
+          <label for="description">Describe what happened!</label>
+          <textarea id="description" [(ngModel)]="report.description" name="description" required minlength="30"></textarea>
+          <small>Minimum 100 words</small>
+        </div>
+  
+        <!-- Image Upload (Placeholder for now) -->
+        <div class="form-group">
+          <label for="image">Add an Image</label>
+          <input type="file" id="image" (change)="onFileSelected($event)">
+        </div>
+  
+        <!-- Submit Button -->
+        <button type="submit" class="submit-btn">Continue</button>
+      </form>
+
+       <!-- Back to Home Button -->
+     <div class="back-button-container">
+        <button (click)="goBackHome()" class="back-home-btn">Back to Home</button>
+      </div>
+
+    </div>
+  </div>
+  

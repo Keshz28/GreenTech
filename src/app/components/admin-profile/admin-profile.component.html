@@ -1,22 +1,26 @@
 <div class="profile-container">
     <div class="profile-header">
-      <h2>USER PROFILE</h2>  
+      <h2>UDMIN PROFILE</h2>  
     </div>
     
     <div class="profile-details">
-      <h2>{{user?.firstName}} {{user?.lastName}}</h2>
-      <p>{{user?.communityName}}</p>
-  
-      <div class="detail-item">
-        <span>Email: {{user?.email}}</span>
+        <h2>{{ admin?.firstName }} {{ admin?.lastName }}</h2>
+        <p>{{ admin?.role }}</p> <!-- If you have a role field for admins, or replace with a relevant field -->
+      
+        <div class="detail-item">
+          <span>Email: {{ admin?.email }}</span>
+        </div>
+        <div class="detail-item">
+          <span>Phone: {{ admin?.phoneNumber }}</span>
+        </div>
+        <div class="detail-item">
+          <span>Address: {{ admin?.address }}</span>
+        </div>
+        <div class="detail-item">
+            <span>Community Name: {{ admin?.communityName }}</span>
+        </div>
       </div>
-      <div class="detail-item">
-        <span>Phone: {{user?.phoneNumber}}</span>
-      </div>
-      <div class="detail-item">
-        <span>Address: {{user?.address}}</span>
-      </div>
-    </div>
+      
   
     <!-- Profile Actions -->
     <div class="profile-actions">

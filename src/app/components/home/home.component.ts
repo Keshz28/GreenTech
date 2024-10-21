@@ -9,12 +9,15 @@ import { NotificationService, Notification } from '../../services/notification.s
 import { UserRegisterComponent } from '../user-register/user-register.component';
 import { ReportsComponent } from '../reports/reports.component';
 import { AdminRegisterComponent } from '../admin-register/admin-register.component';
+import { ReportIssueComponent } from '../report-issue/report-issue.component';
+import { ScheduleComponent } from '../schedule/schedule.component';
+import { AdminProfileComponent } from '../admin-profile/admin-profile.component';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterModule, CommonModule, AdminLoginComponent, UserLoginComponent, RoleSelectionComponent, ReportsComponent, UserRegisterComponent, AdminRegisterComponent],
+  imports: [RouterModule, CommonModule, AdminLoginComponent, UserLoginComponent, RoleSelectionComponent, ReportsComponent, UserRegisterComponent, AdminRegisterComponent, ReportIssueComponent, ScheduleComponent, AdminProfileComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

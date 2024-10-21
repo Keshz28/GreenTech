@@ -30,6 +30,8 @@ export class UserLoginComponent {
     onLogin() {
       if (this.email && this.password){
       const loginData = { email: this.email, password: this.password };
+
+      localStorage.setItem('user', JSON.stringify(loginData));
       
       // Send POST request to the backend
       this.http.post<{ message: string; userId?: string }>('http://localhost:3000/api/login', loginData)
