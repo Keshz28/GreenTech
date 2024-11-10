@@ -6,7 +6,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const User = require('./models/user');
 const Notification = require('./models/notification');
-const Report = require('./models/report');  // Import the Report model
+const Report = require('./models/reports');  // Import the Report model
 
 const app = express();
 
