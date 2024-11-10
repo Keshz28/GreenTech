@@ -19,56 +19,46 @@ import { NotificationService } from '../../services/notification.service';
 
 export class UserLoginComponent {
   
+    private readonly API_BASE_URL = 'http://localhost:3000';  // Define base URL here
+  
     email: string = '';
     password: string = '';
   
     constructor(
       private http: HttpClient,
       private router: Router,
-      private notificationService: NotificationService ) {}
+      private notificationService: NotificationService 
+    ) {}
   
     onLogin() {
-      if (this.email && this.password){
-      const loginData = { email: this.email, password: this.password };
-
-      localStorage.setItem('user', JSON.stringify(loginData));
-      
-      // Send POST request to the backend
-      this.http.post<{ message: string; userId?: string }>('http://localhost:3000/api/login', loginData)
-        .subscribe(response => {
-          console.log(response.message);
-          if (response.userId) {
-            //Redirect to dashboard after successfull login
-            this.router.navigate(['/role-selection']);
-          } else { 
-            const failMessage = 'Login Failed!!! Please Check Your Credentials!';
-            alert(failMessage);
-
-            // Add the message to the notifications
-            this.notificationService.addNotification(failMessage);
-          }
-        }, error => {
-          console.error('Login failed:', error);
-          const serverErrorMessage = 'Login Failed Due To Server Error!!!';
-          alert(serverErrorMessage);
-
-           // Add the server error to the notifications
-           this.notificationService.addNotification(serverErrorMessage);
-        });
-      }else{
-        const missingFieldsMessage = 'Please Enter Both Email and Password!';
-        alert(missingFieldsMessage);
-
-        // Add the missing fields error to the notifications
-        this.notificationService.addNotification(missingFieldsMessage);
+        if (this.email && this.password) {
+          const loginData = { email: this.email, password: this.password };
+  
+          this.http.post<{ message: string; userId?: string; token?: string }>(`${this.API_BASE_URL}/api/login`, loginData)
+            .subscribe(response => {
+              console.log(response.message);
+              
+              if (response.userId && response.token) {
+                localStorage.setItem('authToken', response.token);
+                this.router.navigate(['/role-selection']);
+              } else { 
+                const failMessage = 'Login Failed! Please Check Your Credentials!';
+                alert(failMessage);
+                this.notificationService.addNotification(failMessage);
+              }
+            }, error => {
+              const serverErrorMessage = 'Login Failed Due To Server Error!';
+              alert(serverErrorMessage);
+              this.notificationService.addNotification(serverErrorMessage);
+            });
+        } else {
+          const missingFieldsMessage = 'Please Enter Both Email and Password!';
+          alert(missingFieldsMessage);
+          this.notificationService.addNotification(missingFieldsMessage);
+        }
       }
-    }
-
-    
-
-     // Method to navigate back to the homepage
-    goHome() {
-      this.router.navigate(['/']);  // Navigate to the homepage
-  }
-
-}
+  
+      goHome() {
+        this.router.navigate(['/']);
+      }
+  } 

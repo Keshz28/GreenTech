@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';  // Ensure RouterModule is imported
+import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { RoleSelectionComponent } from './components/role-selection/role-selection.component';
 import { UserLoginComponent } from './components/user-login/user-login.component';
@@ -12,33 +12,50 @@ import { ReportIssueComponent } from './components/report-issue/report-issue.com
 import { HistoryComponent } from './components/history/history.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
-
+import { DashboardLayoutComponent } from './components/dashboard-layout/dashboard-layout.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 // Define your routes here
 const routes: Routes = [
+  // Main non-dashboard routes
   { path: 'home', component: HomeComponent },
   { path: 'admin-login', component: AdminLoginComponent },
   { path: 'role-selection', component: RoleSelectionComponent },
   { path: 'user-login', component: UserLoginComponent },
   { path: 'user-register', component: UserRegisterComponent },
-  { path: 'admin-register', component: AdminRegisterComponent},
-  { path: 'reports', component: ReportsComponent},
-  { path: 'profile', component: ProfileComponent},
+  { path: 'admin-register', component: AdminRegisterComponent },
   { path: 'report-issue', component: ReportIssueComponent},
-  { path: 'history', component: HistoryComponent},
-  { path: 'schedule', component: ScheduleComponent},
-  { path: 'admin-profile', component: AdminProfileComponent},
-
-  // Define the default route (usually home)
-  { path: '', redirectTo: 'home', pathMatch: 'full' },  // Correct the redirect path to 'home'
   
-  // Fallback for undefined routes
-  { path: '**', redirectTo: 'home' }  // Redirect any undefined routes to 'home'
+  { path: 'profile', component: ProfileComponent },
+  
 
+  // Dashboard routes
+  {
+    path: 'dashboard',
+    component: DashboardLayoutComponent,
+    children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' }, // Default dashboard route
+      { path: '', component: DashboardComponent },
+      { path: 'home', component: DashboardLayoutComponent },  // Main dashboard view
+      { path: 'history', component: HistoryComponent },
+      { path: 'schedule', component: ScheduleComponent },
+      { path: 'reports', component: ReportsComponent },
+      { path: 'admin-profile', component: AdminProfileComponent },
+
+      // Redirect /dashboard to /dashboard/home by default
+      { path: '', redirectTo: 'home', pathMatch: 'full' }
+    ]
+  },
+
+  // Redirect root to /dashboard
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+
+  // Fallback for undefined routes
+  { path: '**', redirectTo: '/dashboard' }  // Redirect any undefined routes to dashboard
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],  // Use forRoot with your routes
-  exports: [RouterModule]  // Export RouterModule so it's available throughout the app
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

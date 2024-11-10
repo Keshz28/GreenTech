@@ -11,6 +11,7 @@ import { ReportIssueComponent } from './components/report-issue/report-issue.com
 import { HistoryComponent } from './components/history/history.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
+import { DashboardLayoutComponent } from './components/dashboard-layout/dashboard-layout.component';
 
 
 export const routes: Routes = [
@@ -25,6 +26,16 @@ export const routes: Routes = [
     {path: 'report-issue', component: ReportIssueComponent},
     {path: 'history', component: HistoryComponent},
     {path: 'schedule', component: ScheduleComponent},
-    {path: 'admin-profile', component: AdminProfileComponent}
-   
+    {path: 'dashboard', component: DashboardLayoutComponent,
+        children: [
+            {path: 'history', component: HistoryComponent},
+            {path: 'schedule', component: ScheduleComponent},
+            {path: 'reports', component: ReportsComponent},
+            {path: 'admin-profile', component: AdminProfileComponent},
+
+            {path: '', redirectTo: 'history', pathMatch: 'full'}
+        ]
+    },
+
+    {path: '**', redirectTo: '' }
 ];

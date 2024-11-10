@@ -37,7 +37,7 @@
 /* Save button */
 .save-button {
   padding: 8px 16px;
-  background-color: #28a745;
+  background-color:  #2e7d32;
   color: white;
   border: none;
   border-radius: 4px;
@@ -46,7 +46,7 @@
 }
 
 .save-button:hover {
-  background-color: #218838;
+  background-color:  #2e7d32;
 }
 
 /* Schedule Table */
@@ -95,4 +95,41 @@
     margin-bottom: 20px;
     width: 100%;
   }
+}
+
+/* Container to center the button horizontally */
+.back-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Adjust as needed for spacing */
+}
+
+/* Button styling */
+.back-home-btn {
+  background-color:  #2e7d32; /* Exact green color from your image */
+  color: white;
+  padding: 15px 40px;
+  border: none;
+  border-radius: 10px; /* Rounded corners */
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase; /* Make text uppercase */
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between text and arrow */
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: background-color 0.3s ease; /* Smooth hover transition */
+}
+
+/* Add hover effect */
+.back-home-btn:hover {
+  background-color: #2e7d32; /* Slightly darker green on hover */
+}
+
+/* Arrow styling */
+.back-home-btn::after {
+  content: '→'; /* Unicode arrow */
+  font-size: 18px;
 }

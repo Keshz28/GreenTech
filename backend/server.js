@@ -1,54 +1,22 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const mongoose = require('mongoose');
+// server.js
 
-const app = express();
+const mongoose = require('mongoose');
+const app = require('./app');  // Import the app from app.js
+
 const port = 3000;
 
-app.use(cors());
-app.use(bodyParser.json());
-
-// MongoDB database connection
-mongoose.connect('mongodb+srv://sukesh:PMasQ9sWWNzejBgV@greentech.1mzrd.mongodb.net/?retryWrites=true&w=majority&appName=GreenTech')
+// MongoDB connection
+mongoose.connect("mongodb+srv://sukesh:PMasQ9sWWNzejBgV@greentech.1mzrd.mongodb.net/?retryWrites=true&w=majority&appName=GreenTech", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
   .then(() => {
-    console.log('Connected to the MongoDB database.');
+    console.log("Connected to MongoDB database.");
+    // Start the server after a successful database connection
+    app.listen(port, () => {
+      console.log(`Server is running on http://localhost:${port}`);
+    });
   })
-  .catch(err => {
-    console.error('Error connecting to the database:', err);
+  .catch((err) => {
+    console.error("Error connecting to the MongoDB database:", err);
   });
-
-// Define a Notification model
-const Notification = mongoose.model('Notification', new mongoose.Schema({
-  title: String,
-  message: String,
-}));
-
-// Define API routes
-app.get('/api/notifications', (req, res) => {
-  Notification.find({}, (err, results) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
-    res.json(results);
-  });
-});
-
-app.post('/api/notifications', (req, res) => {
-  const notification = new Notification(req.body);
-  notification.save((err, result) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
-    res.status(201).send(result);
-  });
-});
-
-app.get('/api/users/:id', (req, res) => {
-  const userId = req.params.id;
-  // Logic to fetch user data by userId
-});
-
-app.listen(port, () => {
-  console.log('Server is running on http://localhost:${port}');
-});

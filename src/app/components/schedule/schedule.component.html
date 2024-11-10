@@ -61,4 +61,9 @@
     <!-- If no schedules exist, display a message -->
     <p *ngIf="schedules.length === 0">No schedules added yet.</p>
   </div>
+
+   <!-- Back to Home Button just below the "view more" button -->
+  <div class="back-button-container">
+    <button (click)="goBackHome()" class="back-home-btn">Back to Home</button>
+  </div>
 </div>

@@ -1,85 +1,81 @@
 /* Ensure the top bar is at the very top of the page */
 body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%; /* Ensure the body height is 100% to allow full height layout */
-  }
-  
-  /* Top Bar */
-  .profile-header {
-    background-color: #2c5f2d; /* Dark green background */
-    color: white;
-    height: 120px; /* Adjust the height as needed */
-    width: 100vw; /* Full viewport width */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem; /* Larger font for USER PROFILE */
-    letter-spacing: 1.5px;
-    font-weight: bold;
-    position: absolute; /* Ensure it sticks to the top */
-    top: 0;  /* Stick to the top of the page */
-    left: 0; /* Stick to the left edge */
-    z-index: 10; /* Ensure it stays above other content */
-    margin: 0;  /* Remove any margins */
-    padding: 0; /* Remove any padding */
-  }
-  
-  /* Main profile container background color */
-  .profile-container {
-    background-color: #d7e5cc; /* Light green background */
-    height: 100vh; /* Full height of the page */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; /* Align content starting from top */
-    padding-top: 130px; /* Space for the top bar */
-  }
-  
-  /* Profile details container */
-  .profile-details {
-    background-color: white;
-    padding: 30px;
-    margin-top: 20px;
-    width: 60%; /* Adjust width as needed */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    text-align: center;
-  }
-  
-  .profile-details h2 {
-    font-size: 2.2rem;
-    margin-bottom: 10px;
-    color: #2c5f2d; /* Dark green for name */
-  }
-  
-  .profile-details p {
-    margin-bottom: 10px;
-    font-size: 1.1rem;
-  }
-  
-  .detail-item {
-    margin: 10px 0;
-    font-size: 1.2rem;
-  }
-  
-  /* Buttons for profile actions */
-  .profile-actions {
-    margin-top: 20px;
-  }
-  
-  .profile-actions button {
-    background-color: #2c5f2d;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    margin: 10px;
-  }
-  
-  .profile-actions button:hover {
-    background-color: #3e7d40;
-  }
-  
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Ensure the body height is 100% to allow full height layout */
+}
+
+/* Top Bar */
+.profile-header {
+  background-color: #2c5f2d; /* Dark green background */
+  color: white;
+  height: 120px; /* Adjust the height as needed */
+  width: 100%; /* Full width within its container */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem; /* Larger font for "Admin Profile" */
+  letter-spacing: 1.5px;
+  font-weight: bold;
+  position: relative; /* Change from absolute to relative */
+  margin: 0;  /* Remove any margins */
+  padding: 0; /* Remove any padding */
+}
+
+/* Main profile container background color */
+.profile-container {
+  background-color: #d7e5cc; /* Light green background */
+  min-height: 100vh; /* Use min-height for flexibility */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align content starting from top */
+  padding-top: 20px; /* Small padding, the profile-header handles spacing */
+}
+
+/* Profile details container */
+.profile-details {
+  background-color: white;
+  padding: 30px;
+  margin-top: 20px;
+  width: 60%; /* Adjust width as needed */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.profile-details h2 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  color: #2c5f2d; /* Dark green for title */
+}
+
+.profile-details p {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.detail-item {
+  margin: 10px 0;
+  font-size: 1.2rem;
+}
+
+/* Buttons for profile actions */
+.profile-actions {
+  margin-top: 20px;
+}
+
+.profile-actions button {
+  background-color: #2c5f2d;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.profile-actions button:hover {
+  background-color: #3e7d40;
+}

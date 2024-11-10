@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
-
+import { Router } from '@angular/router'; // Import Router
 
 @Component({
   selector: 'app-schedule',
@@ -13,11 +12,18 @@ import { CommonModule } from '@angular/common';
 })
 export class ScheduleComponent {
   type: string = '';
-  date: Date | null = null; // Date should be either Date object or null
+  date: Date | null = null;
   month: string = '';
   time: string = '';
 
   schedules: { type: string, date: Date | null, month: string, time: string }[] = [];
+
+  constructor(private router: Router) {} // Inject Router service
+
+  // Method to navigate to the home page
+  goBackHome() {
+    this.router.navigate(['/']); // Adjust path if your home route is different
+  }
 
   addSchedule() {
     if (this.type && this.date && this.month && this.time) {
