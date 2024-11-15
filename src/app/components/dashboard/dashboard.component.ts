@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
@@ -33,7 +37,7 @@ export class DashboardComponent implements OnInit {
       .join(' ');
   }
 
-  // Bar Chart Data for Activity Trends
+  // Activity data for bar chart
   activityData = [
     { label: 'Mon', value: 20 },
     { label: 'Tue', value: 30 },
@@ -46,13 +50,13 @@ export class DashboardComponent implements OnInit {
 
   // Notifications and Recent Activities
   notifications = [
-    { message: 'New feedback from User123', time: new Date() },
+    { message: 'New feedback from User Rhea', time: new Date() },
     { message: 'Server maintenance scheduled', time: new Date() }
   ];
 
   recentActivities = [
-    { description: 'User JohnDoe submitted feedback', time: new Date() },
-    { description: 'New user registration: JaneSmith', time: new Date() }
+    { description: 'User Liv submitted feedback', time: new Date() },
+    { description: 'New user registration: Cody Rhodes', time: new Date() }
   ];
 
   constructor() {}

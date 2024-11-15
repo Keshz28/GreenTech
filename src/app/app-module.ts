@@ -36,6 +36,7 @@ const appRoutes: Routes = [
   { path: 'history', component: HistoryComponent },
   { path: 'schedule', component: ScheduleComponent },
   { path: 'admin-profile', component: AdminProfileComponent },
+  //i havent added the dashboard route yet, we check and see if it works
   {
     path: 'dashboard',
     component: DashboardLayoutComponent,
@@ -51,7 +52,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    DashboardComponent // Add DashboardComponent here
+     // Add DashboardComponent here
   ],
   imports: [
     BrowserModule,

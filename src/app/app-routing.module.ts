@@ -15,35 +15,26 @@ import { AdminProfileComponent } from './components/admin-profile/admin-profile.
 import { DashboardLayoutComponent } from './components/dashboard-layout/dashboard-layout.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
-// Define your routes here
 const routes: Routes = [
-  // Main non-dashboard routes
   { path: 'home', component: HomeComponent },
   { path: 'admin-login', component: AdminLoginComponent },
   { path: 'role-selection', component: RoleSelectionComponent },
   { path: 'user-login', component: UserLoginComponent },
   { path: 'user-register', component: UserRegisterComponent },
   { path: 'admin-register', component: AdminRegisterComponent },
-  { path: 'report-issue', component: ReportIssueComponent},
-  
+  { path: 'report-issue', component: ReportIssueComponent },
   { path: 'profile', component: ProfileComponent },
-  
 
   // Dashboard routes
   {
     path: 'dashboard',
     component: DashboardLayoutComponent,
     children: [
-      { path: '', redirectTo: 'home', pathMatch: 'full' }, // Default dashboard route
-      { path: '', component: DashboardComponent },
-      { path: 'home', component: DashboardLayoutComponent },  // Main dashboard view
+      { path: 'dashboard', component: DashboardComponent }, // Default to main dashboard view
       { path: 'history', component: HistoryComponent },
       { path: 'schedule', component: ScheduleComponent },
       { path: 'reports', component: ReportsComponent },
-      { path: 'admin-profile', component: AdminProfileComponent },
-
-      // Redirect /dashboard to /dashboard/home by default
-      { path: '', redirectTo: 'home', pathMatch: 'full' }
+      { path: 'admin-profile', component: AdminProfileComponent }
     ]
   },
 
@@ -51,8 +42,9 @@ const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
 
   // Fallback for undefined routes
-  { path: '**', redirectTo: '/dashboard' }  // Redirect any undefined routes to dashboard
+  { path: '**', redirectTo: '/dashboard' }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
