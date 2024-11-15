@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AdminLoginComponent } from '../admin-login/admin-login.component';
@@ -8,12 +9,16 @@ import { NotificationService, Notification } from '../../services/notification.s
 import { UserRegisterComponent } from '../user-register/user-register.component';
 import { ReportsComponent } from '../reports/reports.component';
 import { AdminRegisterComponent } from '../admin-register/admin-register.component';
+import { ReportIssueComponent } from '../report-issue/report-issue.component';
+import { ScheduleComponent } from '../schedule/schedule.component';
+import { AdminProfileComponent } from '../admin-profile/admin-profile.component';
+import { DashboardLayoutComponent } from '../dashboard-layout/dashboard-layout.component';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterModule, CommonModule, AdminLoginComponent, UserLoginComponent, RoleSelectionComponent, ReportsComponent, UserRegisterComponent, AdminRegisterComponent],
+  imports: [RouterModule, CommonModule, AdminLoginComponent, UserLoginComponent, RoleSelectionComponent, ReportsComponent, UserRegisterComponent, AdminRegisterComponent, ReportIssueComponent, ScheduleComponent, AdminProfileComponent, DashboardLayoutComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -22,7 +27,10 @@ export class HomeComponent implements OnInit {
   notifications: Notification[] = []; // Array to hold notifications
   unreadCount = 0;
 
-  constructor(private notificationService: NotificationService) {}
+  constructor(
+    private notificationService: NotificationService,
+    private router : Router //Inject router for navigation
+    ) {}
 
   ngOnInit() {
     // Fetch notifications from the service when the component initializes
@@ -37,6 +45,11 @@ export class HomeComponent implements OnInit {
 
     // Calculate the unread count (dynamic notifications only)
     this.unreadCount = this.notificationService.getUnreadCount();
+  }
+
+  //New method to navigate to the user profile
+  navigateToProfile(){
+    this.router.navigate(['/user-profile']); // Navigate to the user profile page
   }
 
   // Toggle notification visibility
@@ -65,7 +78,5 @@ export class HomeComponent implements OnInit {
       this.showNotifications = false;
     }
   }
-
-  
 }
 

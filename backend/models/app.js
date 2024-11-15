@@ -9,8 +9,7 @@ const Admin = require('./models/admin');  // Import Admin model
 const app = express();
 
 // Replace <db_password> with your actual MongoDB password
-mongoose.connect('mongodb+srv://sukesh:<db_password>@greentech.1mzrd.mongodb.net/node-angular?retryWrites=true&w=majority&appName=GreenTech', 
-  { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb+srv://sukesh:PMasQ9sWWNzejBgV@greentech.1mzrd.mongodb.net/node-angular?retryWrites=true&w=majority&appName=GreenTech')
   .then(() => {
     console.log("Connected to MongoDB!");
   })

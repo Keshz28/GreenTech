@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AdminRegisterComponent } from '../admin-register/admin-register.component';
 import { UserRegisterComponent } from '../user-register/user-register.component';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-user-login',
@@ -18,39 +19,46 @@ import { UserRegisterComponent } from '../user-register/user-register.component'
 
 export class UserLoginComponent {
   
+    private readonly API_BASE_URL = 'http://localhost:3000';  // Define base URL here
+  
     email: string = '';
     password: string = '';
   
-    constructor(private http: HttpClient, private router: Router) {}
+    constructor(
+      private http: HttpClient,
+      private router: Router,
+      private notificationService: NotificationService 
+    ) {}
   
     onLogin() {
-      if (this.email && this.password){
-      const loginData = { email: this.email, password: this.password };
-      
-      // Send POST request to the backend
-      this.http.post<{ message: string; userId?: string }>('http://localhost:3000/api/login', loginData)
-        .subscribe(response => {
-          console.log(response.message);
-          if (response.userId) {
-            //Redirect to dashboard after successfull login
-            this.router.navigate(['/role-selection']);
-          } else { 
-            alert('Login Failed!!! Please Check Your Credentials!')
-          }
-        }, error => {
-          console.error('Login failed:', error);
-          alert('Login Failed Due To Server Error!!!')
-        });
-      }else{
-        alert('Please Enter Both Email and Password!')
+        if (this.email && this.password) {
+          const loginData = { email: this.email, password: this.password };
+  
+          this.http.post<{ message: string; userId?: string; token?: string }>(`${this.API_BASE_URL}/api/login`, loginData)
+            .subscribe(response => {
+              console.log(response.message);
+              
+              if (response.userId && response.token) {
+                localStorage.setItem('authToken', response.token);
+                this.router.navigate(['/role-selection']);
+              } else { 
+                const failMessage = 'Login Failed! Please Check Your Credentials!';
+                alert(failMessage);
+                this.notificationService.addNotification(failMessage);
+              }
+            }, error => {
+              const serverErrorMessage = 'Login Failed Due To Server Error!';
+              alert(serverErrorMessage);
+              this.notificationService.addNotification(serverErrorMessage);
+            });
+        } else {
+          const missingFieldsMessage = 'Please Enter Both Email and Password!';
+          alert(missingFieldsMessage);
+          this.notificationService.addNotification(missingFieldsMessage);
+        }
       }
-    }
-
-    
-
-     // Method to navigate back to the homepage
-    goHome() {
-      this.router.navigate(['/']);  // Navigate to the homepage
-  }
-
-}
+  
+      goHome() {
+        this.router.navigate(['/']);
+      }
+  } 

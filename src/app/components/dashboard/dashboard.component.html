@@ -1,0 +1,58 @@
+<!-- Dashboard Content -->
+<div class="content">
+    <!-- KPI Cards Section -->
+    <div class="kpi-cards">
+      <div class="kpi-card" *ngFor="let kpi of kpis">
+        <div class="kpi-icon"><i [class]="kpi.icon"></i></div>
+        <div class="kpi-info">
+          <h3>{{ kpi.value }}</h3>
+          <p>{{ kpi.label }}</p>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Chart Row for User Growth and Activity Trends -->
+    <div class="chart-row">
+      <div class="chart-container half-width">
+        <h4>User Growth</h4>
+        <svg class="line-chart" viewBox="0 0 400 200" preserveAspectRatio="none">
+          <circle *ngFor="let point of userGrowthData; let i = index"
+                  [attr.cx]="50 + i * 50" [attr.cy]="200 - point.value * 0.1"
+                  r="4" class="data-point"></circle>
+          <polyline [attr.points]="userGrowthPoints" fill="none" stroke="#4caf50" stroke-width="2" />
+        </svg>
+      </div>
+  
+      <div class="chart-container half-width">
+        <h4>Activity Trends</h4>
+        <div class="bar-chart">
+          <div class="bar" *ngFor="let activity of activityData" [style.height.%]="activity.value * 2"
+               [title]="activity.label + ': ' + activity.value"></div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Row for Notifications and Recent Activities -->
+    <div class="info-row">
+      <!-- Notifications Section -->
+      <div class="info-container half-width">
+        <h4>Notifications</h4>
+        <ul>
+          <li *ngFor="let notification of notifications">
+            <span>{{ notification.message }}</span> - <small>{{ notification.time | date:'short' }}</small>
+          </li>
+        </ul>
+      </div>
+  
+      <!-- Recent Activities Section -->
+      <div class="info-container half-width">
+        <h4>Recent Activities</h4>
+        <ul>
+          <li *ngFor="let activity of recentActivities">
+            {{ activity.description }} - <small>{{ activity.time | date:'short' }}</small>
+          </li>
+        </ul>
+      </div>
+    </div> 
+  </div>
+  

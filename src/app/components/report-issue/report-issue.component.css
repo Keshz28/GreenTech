@@ -1,0 +1,136 @@
+/* Ensure body and html take full height */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f7f7f7; /* Optional background color */
+  }
+  
+  /* Full page wrapper to ensure the form is centered both ways */
+  .full-page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* 100% viewport height */
+    width: 100%; /* Full width */
+  }
+  
+  .report-container {
+    background-color: #e6f4ea; /* Light green background */
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 100%; /* Ensure the form doesn't overflow the screen */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  /* Remove margin from the h2 element */
+  h2 {
+    text-align: center;
+    color: #2e7d32; /* Dark green heading */
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    color: #2e7d32; /* Dark green labels */
+  }
+  
+  input, select, textarea {
+    width: calc(100% - 20px); /* Ensure uniform width for all inputs */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+    font-size: 16px;
+    background-color: #fff; /* White background */
+  }
+  
+  select {
+    background-color: #fff; /* White background for the dropdown */
+  }
+  
+  select:focus, input:focus, textarea:focus {
+    border-color: #2e7d32; /* Green border on focus */
+    outline: none;
+  }
+  
+  textarea {
+    height: 120px;
+    resize: none; /* Disable textarea resizing */
+  }
+  
+  small {
+    color: #666;
+    font-size: 12px;
+  }
+
+
+    input[type="file"] {
+        padding: 3px; /* Adjust padding for the file input */
+  }
+  
+  
+  .submit-btn {
+    background-color: #2e7d32; /* Dark green button */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    width: calc(100% - 20px); /* Align submit button width with other inputs */
+    text-align: center;
+    margin-top: 10px; /* Add space between file input and button */
+  }
+  
+  .submit-btn:hover {
+    background-color: #1b5e20; /* Slightly darker green on hover */
+  }
+  
+  /* Ensure the form remains responsive */
+  @media (max-width: 600px) {
+    .report-container {
+      padding: 15px;
+      max-width: 100%;
+    }
+  
+    input, select, textarea {
+      font-size: 14px;
+    }
+  
+    .submit-btn {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+
+  /* Back Button Styling */
+.back-button-container {
+    margin-top: 20px; /* Adds some space above the button */
+    display: flex;
+    justify-content: center; /* Center the button */
+  }
+  
+  .back-home-btn {
+    background-color: #2e7d32; /* Dark green */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .back-home-btn:hover {
+    background-color: #1b5e20; /* Darker green on hover */
+  }
+  
+  

@@ -7,6 +7,7 @@ import { RoleSelectionComponent } from '../role-selection/role-selection.compone
 import { UserLoginComponent } from '../user-login/user-login.component';
 import { UserRegisterComponent } from '../user-register/user-register.component';
 import { AdminRegisterComponent } from '../admin-register/admin-register.component';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-admin-login',
@@ -19,12 +20,18 @@ export class AdminLoginComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private notificationService: NotificationService  // Inject NotificationService
+  ) {}
 
   // Handle the login logic
   onLogin() {
     if (this.email && this.password) {
       const loginData = { email: this.email, password: this.password };
+
+      localStorage.setItem('user', JSON.stringify(loginData));
 
       // Send login request to the backend
       this.http.post<{ message: string; adminId?: string }>('http://localhost:3000/api/admin/login', loginData)
@@ -34,14 +41,20 @@ export class AdminLoginComponent {
             // Redirect to dashboard on successful login
             this.router.navigate(['/admin-dashboard']);
           } else {
-            alert('Login Failed!!! Please Check Your Credentials!');
+            const failMsg = 'Login Failed!!! Please Check Your Credentials!';
+            alert(failMsg);
+            this.notificationService.addNotification(failMsg);  // Add alert to notification service
           }
         }, error => {
+          const serverErrorMsg = 'Login Failed Due To Server Error!!!';
           console.error('Login failed:', error);
-          alert('Login Failed Due To Server Errror!!!');
+          alert(serverErrorMsg);
+          this.notificationService.addNotification(serverErrorMsg);  // Add server error to notification service
         });
     } else {
-      alert('Please Enter Both Email and Password!');
+      const missingFieldsMsg = 'Please Enter Both Email and Password!';
+      alert(missingFieldsMsg);
+      this.notificationService.addNotification(missingFieldsMsg);  // Add alert to notification service
     }
   }
 

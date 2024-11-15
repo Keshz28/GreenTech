@@ -7,17 +7,20 @@ import { AdminRegisterComponent } from '../admin-register/admin-register.compone
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
+import { NotificationService } from '../../services/notification.service';
+import { ProfileComponent } from '../profile/profile.component';
 
 @Component({
   selector: 'app-user-register',
   standalone: true,
-  imports: [RouterModule, RoleSelectionComponent, AdminLoginComponent, UserLoginComponent, AdminRegisterComponent, FormsModule],
+  imports: [RouterModule, RoleSelectionComponent, AdminLoginComponent, UserLoginComponent, AdminRegisterComponent, FormsModule, ProfileComponent],
   templateUrl: './user-register.component.html',
   styleUrls: ['./user-register.component.css']
 })
 export class UserRegisterComponent {
  
+    private readonly API_BASE_URL = 'http://localhost:3000/api/register';  // Define base URL here
+  
     firstName: string = '';
     lastName: string = '';
     email: string = '';
@@ -26,7 +29,11 @@ export class UserRegisterComponent {
     phoneNumber: string = '';
     password: string = '';
   
-    constructor(private http: HttpClient, private router: Router) {}
+    constructor(
+      private http: HttpClient, 
+      private router: Router,
+      private notificationService: NotificationService 
+    ) {}
   
     onRegister() {
       const registrationData = {
@@ -38,25 +45,27 @@ export class UserRegisterComponent {
         phoneNumber: this.phoneNumber,
         password: this.password
       };
-  
-      this.http.post<{ message: string; userId?: string }>('http://localhost:3000/api/register', registrationData)
-        .subscribe(response => {
-          console.log(response.message);
-          // Redirect to another page on successful registration
-          if (response.userId) {
-            this.router.navigate(['/role-selection']);
-          } else {
-            alert ('Registration Failed!!! An Accounting Error Had Been Occured!')
-          }
-        }, error => {
-          console.error('Registration failed:', error);
-          alert ('Login Failed Due To Server Error!!!')
-        });
-    }
+    
+      this.http.post<{ message: string; userId?: string }>(`${this.API_BASE_URL}/api/register`, registrationData)
+      .subscribe(response => {
+        console.log('API Response:', response);
+        
+        if (response && response.userId) {
+          this.router.navigate(['/profile']);
+        } else {
+          const errorMsg = 'Registration Failed! Please Check Your Details.';
+          alert(errorMsg);
+          this.notificationService.addNotification(errorMsg);
+        }
+      }, error => {
+        const serverError = 'Registration Failed Due to Server Error!!!';
+        console.error('Registration failed:', error);
+        alert(serverError);
+        this.notificationService.addNotification(serverError);
+      });
+  }
 
-    // Method to navigate back to the homepage
-    goHome() {
-      this.router.navigate(['/']);  // Navigate to the homepage
-    }
-  
+  goHome() {
+    this.router.navigate(['/']);
+  }
 }

@@ -1,0 +1,43 @@
+<div class="profile-container">
+    <div class="profile-header">
+      <h2>ADMIN PROFILE</h2>  
+    </div>
+    
+    <div class="profile-details">
+        <h2>{{ admin?.firstName }} {{ admin?.lastName }}</h2>
+        <p>{{ admin?.role }}</p> <!-- If you have a role field for admins, or replace with a relevant field -->
+      
+        <div class="detail-item">
+          <span>Email: {{ admin?.email }}</span>
+        </div>
+        <div class="detail-item">
+          <span>Phone: {{ admin?.phoneNumber }}</span>
+        </div>
+        <div class="detail-item">
+          <span>Address: {{ admin?.address }}</span>
+        </div>
+        <div class="detail-item">
+            <span>Community Name: {{ admin?.communityName }}</span>
+        </div>
+      </div>
+      
+  
+    <!-- Profile Actions -->
+    <div class="profile-actions">
+      <button (click)="editProfile()">Edit Profile</button>
+      <button (click)="goHome()">Back to Home</button>
+    </div>
+  
+    <!-- Notifications Popup -->
+    <div class="notification-popup" [style.display]="showNotifications ? 'block' : 'none'">  <!-- Use style binding instead of *ngIf -->
+      <div class="notification-header">
+        <h3>Notifications</h3>
+        <button (click)="toggleNotifications()">Close</button>
+      </div>
+      <div class="notification-content">
+        <!-- Manually display notifications using a loop in the component -->
+        <div id="notification-list"></div> <!-- Placeholder to dynamically append notifications -->
+      </div>
+    </div>
+  </div>
+  
