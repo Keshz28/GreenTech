@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';  // Router for navigation
-import { HttpClient } from '@angular/common/http';  // HttpClient for making API calls
-import { FormsModule } from '@angular/forms';  // FormsModule for ngModel binding
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { RoleSelectionComponent } from '../role-selection/role-selection.component';
 import { UserLoginComponent } from '../user-login/user-login.component';
@@ -12,54 +12,71 @@ import { NotificationService } from '../../services/notification.service';
 @Component({
   selector: 'app-admin-login',
   standalone: true,
-  imports: [FormsModule, RouterModule, RoleSelectionComponent, UserLoginComponent, UserRegisterComponent, AdminRegisterComponent],  // Import FormsModule for ngModel
+  imports: [
+    FormsModule,
+    RouterModule,
+    RoleSelectionComponent,
+    UserLoginComponent,
+    UserRegisterComponent,
+    AdminRegisterComponent,
+  ],
   templateUrl: './admin-login.component.html',
-  styleUrls: ['./admin-login.component.css']
+  styleUrls: ['./admin-login.component.css'],
 })
 export class AdminLoginComponent {
   email: string = '';
   password: string = '';
 
+  private readonly API_BASE_URL = 'http://localhost:3000/api';
+
   constructor(
     private http: HttpClient,
     private router: Router,
-    private notificationService: NotificationService  // Inject NotificationService
+    private notificationService: NotificationService
   ) {}
 
-  // Handle the login logic
   onLogin() {
-    if (this.email && this.password) {
-      const loginData = { email: this.email, password: this.password };
+    if (!this.email || !this.password) {
+      const missingFieldsMsg = 'Please Enter Both Email and Password!';
+      alert(missingFieldsMsg);
+      this.notificationService.addNotification(missingFieldsMsg);
+      return;
+    }
 
-      localStorage.setItem('user', JSON.stringify(loginData));
+    const loginData = { email: this.email, password: this.password };
 
-      // Send login request to the backend
-      this.http.post<{ message: string; adminId?: string }>('http://localhost:3000/api/admin/login', loginData)
-        .subscribe(response => {
+    localStorage.setItem('user', JSON.stringify(loginData));
+
+    this.http
+      .post<{ message: string; adminId?: string; token?: string }>(
+        `${this.API_BASE_URL}/admin/login`,
+        loginData
+      )
+      .subscribe(
+        (response) => {
           console.log(response.message);
-          if (response.adminId) {
-            // Redirect to dashboard on successful login
+          if (response.adminId && response.token) {
+            localStorage.setItem('authToken', response.token);
+            alert('Login successful!');
+            this.notificationService.addNotification('Admin logged in successfully!');
             this.router.navigate(['/admin-dashboard']);
           } else {
             const failMsg = 'Login Failed!!! Please Check Your Credentials!';
             alert(failMsg);
-            this.notificationService.addNotification(failMsg);  // Add alert to notification service
+            this.notificationService.addNotification(failMsg);
           }
-        }, error => {
+        },
+        (error) => {
           const serverErrorMsg = 'Login Failed Due To Server Error!!!';
           console.error('Login failed:', error);
           alert(serverErrorMsg);
-          this.notificationService.addNotification(serverErrorMsg);  // Add server error to notification service
-        });
-    } else {
-      const missingFieldsMsg = 'Please Enter Both Email and Password!';
-      alert(missingFieldsMsg);
-      this.notificationService.addNotification(missingFieldsMsg);  // Add alert to notification service
-    }
+          this.notificationService.addNotification(serverErrorMsg);
+        }
+      );
   }
 
-  // Navigate back to the home page
   goHome() {
     this.router.navigate(['/']);
   }
 }
+

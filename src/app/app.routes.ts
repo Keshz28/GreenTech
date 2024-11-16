@@ -12,31 +12,37 @@ import { HistoryComponent } from './components/history/history.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
 import { DashboardLayoutComponent } from './components/dashboard-layout/dashboard-layout.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component'; // Import main dashboard component
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 export const routes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'admin-login', component: AdminLoginComponent },
-    { path: 'user-login', component: UserLoginComponent },
-    { path: 'user-register', component: UserRegisterComponent },
-    { path: 'admin-register', component: AdminRegisterComponent },
-    { path: 'role-selection', component: RoleSelectionComponent },
-    { path: 'report-issue', component: ReportIssueComponent },
-    { path: 'profile', component: ProfileComponent },
+  { path: '', component: HomeComponent },
+  { path: 'admin-login', component: AdminLoginComponent },
+  { path: 'user-login', component: UserLoginComponent },
+  { path: 'user-register', component: UserRegisterComponent },
+  { path: 'admin-register', component: AdminRegisterComponent },
+  { path: 'role-selection', component: RoleSelectionComponent },
+  { path: 'report-issue', component: ReportIssueComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'history', component: HistoryComponent },
+  { path: 'schedule', component: ScheduleComponent },
+  { path: 'reports', component: ReportsComponent },
 
-    // Dashboard routes
-    {
-        path: 'dashboard',
-        component: DashboardLayoutComponent,
-        children: [
-            { path: '', component: DashboardComponent }, // Main dashboard view (stats & charts)
-            { path: 'history', component: HistoryComponent },
-            { path: 'schedule', component: ScheduleComponent },
-            { path: 'reports', component: ReportsComponent },
-            { path: 'admin-profile', component: AdminProfileComponent }
-        ]
-    },
+  // Explicit route for admin dashboard
+  { path: 'admin-dashboard', component: DashboardLayoutComponent },
 
-    // Wildcard route to redirect any undefined path
-    { path: '**', redirectTo: '' }
+  // Dashboard child routes
+  {
+    path: 'dashboard',
+    component: DashboardLayoutComponent,
+    children: [
+      { path: '', component: DashboardComponent },
+      { path: 'history', component: HistoryComponent },
+      { path: 'schedule', component: ScheduleComponent },
+      { path: 'reports', component: ReportsComponent },
+      { path: 'admin-profile', component: AdminProfileComponent },
+    ],
+  },
+
+  // Wildcard route
+  { path: '**', redirectTo: '' },
 ];

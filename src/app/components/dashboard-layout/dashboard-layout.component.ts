@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './dashboard-layout.component.html',
-  styleUrls: ['./dashboard-layout.component.css']
+  styleUrls: ['./dashboard-layout.component.css'],
 })
 export class DashboardLayoutComponent implements OnInit {
   constructor() {}
