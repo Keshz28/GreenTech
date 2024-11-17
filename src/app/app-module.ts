@@ -52,6 +52,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
+    
      // Add DashboardComponent here
   ],
   imports: [

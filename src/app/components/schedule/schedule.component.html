@@ -1,69 +1,53 @@
 <div class="main-content">
-  <div class="form-container">
-
-    <!-- Type Field -->
-    <div class="input-field">
-      <label for="type">Type:</label>
-      <input type="text" [(ngModel)]="type" placeholder="Enter type" />
+  <!-- Form for Adding a Schedule -->
+  <div class="form-card">
+    <div class="form-container">
+      <div class="input-group">
+        <label>Type:</label>
+        <select [(ngModel)]="type">
+          <option value="plastic">Plastic</option>
+          <option value="glass">Glass</option>
+          <option value="paper">Paper</option>
+          <option value="batteries">Batteries</option>
+          <option value="organic">Organic</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label>Date:</label>
+        <input type="date" [(ngModel)]="date" (change)="onDateChange($event)" />
+      </div>
+      <div class="input-group">
+        <label>Time:</label>
+        <input type="time" [(ngModel)]="time" />
+      </div>
+      <div class="input-group">
+        <label>Location:</label>
+        <input type="text" [(ngModel)]="location" placeholder="Enter location" />
+      </div>
+      <button (click)="addSchedule()" class="save-button">Save</button>
     </div>
-
-    <!-- Date Field -->
-    <div class="input-field">
-      <label for="date">Date:</label>
-      <input type="date" [(ngModel)]="date" placeholder="Select date" />
-    </div>
-
-    <!-- Month Field -->
-    <div class="input-field">
-      <label for="month">Month:</label>
-      <input type="text" [(ngModel)]="month" placeholder="Enter month" />
-    </div>
-
-    <!-- Time Field -->
-    <div class="input-field">
-      <label for="time">Time:</label>
-      <input type="text" [(ngModel)]="time" placeholder="Enter time" />
-    </div>
-
-    <!-- Save Button -->
-    <button (click)="addSchedule()" class="save-button">Save</button>
-
   </div>
 
-  <!-- Schedule Table Section -->
-  <div class="schedule-list">
+  <!-- Schedule List -->
+  <div class="schedule-card">
     <h3>Schedules</h3>
-    
-    <!-- Display Schedules in a Table using ngFor -->
-    <table *ngIf="schedules.length > 0" class="schedule-table">
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th>Date</th>
-          <th>Month</th>
-          <th>Time</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let schedule of schedules; let i = index">
-          <td>{{ schedule.type }}</td>
-          <td>{{ schedule.date | date:'shortDate' }}</td>
-          <td>{{ schedule.month }}</td>
-          <td>{{ schedule.time }}</td>
-          <td>
-            <button (click)="removeSchedule(i)" class="delete-button">Remove</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    
-    <!-- If no schedules exist, display a message -->
-    <p *ngIf="schedules.length === 0">No schedules added yet.</p>
+    <div class="schedule-item" *ngFor="let schedule of schedules; let i = index">
+      <div class="schedule-details">
+        <span><strong>Type:</strong> {{ schedule.type }}</span>
+        <span><strong>Date:</strong> {{ schedule.date | date }} ({{ schedule.dayOfWeek }})</span>
+        <span><strong>Time:</strong> {{ schedule.time }}</span>
+        <span><strong>Location:</strong> {{ schedule.location }}</span>
+      </div>
+      <button (click)="removeSchedule(schedule._id!)" class="delete-button">
+        X
+      </button>
+    </div>
   </div>
 
-   <!-- Back to Home Button just below the "view more" button -->
+  <!-- Back to Home Button -->
   <div class="back-button-container">
     <button (click)="goBackHome()" class="back-home-btn">Back to Home</button>
   </div>
 </div>
+
+

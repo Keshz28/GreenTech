@@ -1,51 +1,84 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router'; // Import Router
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router'; // For navigation
+import { ScheduleService, Schedule } from '../../services/schedule.service';
 
 @Component({
   selector: 'app-schedule',
+  standalone: true,
   templateUrl: './schedule.component.html',
   styleUrls: ['./schedule.component.css'],
-  imports: [FormsModule, CommonModule],
-  standalone: true
+  imports: [CommonModule, FormsModule], // Import necessary Angular modules
+  providers: [ScheduleService], // Provide the service here for standalone
 })
-export class ScheduleComponent {
-  type: string = '';
-  date: Date | null = null;
-  month: string = '';
-  time: string = '';
+export class ScheduleComponent implements OnInit {
+  type: string = ''; // Input for Type
+  date: string = ''; // Input for Date
+  time: string = ''; // Input for Time
+  location: string = ''; // Input for Location
+  dayOfWeek: string = ''; // To display the day of the week
+  schedules: Schedule[] = []; // List of schedules
 
-  schedules: { type: string, date: Date | null, month: string, time: string }[] = [];
+  constructor(private scheduleService: ScheduleService, private router: Router) {}
 
-  constructor(private router: Router) {} // Inject Router service
-
-  // Method to navigate to the home page
-  goBackHome() {
-    this.router.navigate(['/']); // Adjust path if your home route is different
+  ngOnInit() {
+    this.loadSchedules(); // Load schedules when the component is initialized
   }
 
-  addSchedule() {
-    if (this.type && this.date && this.month && this.time) {
-      this.schedules.push({
-        type: this.type,
-        date: this.date,
-        month: this.month,
-        time: this.time
-      });
+  // Navigate back to the Home component
+  goBackHome(): void {
+    this.router.navigate(['/']); // Navigate to the Home route
+  }
 
-      // Clear fields after adding
-      this.type = '';
-      this.date = null;
-      this.month = '';
-      this.time = '';
-    } else {
-      alert('Please fill all fields before adding a schedule.');
+  // Load schedules from the service
+  loadSchedules() {
+    this.scheduleService.getSchedules().subscribe((data) => {
+      this.schedules = data;
+    });
+  }
+
+  // Handle date input change
+  onDateChange(event: any) {
+    const selectedDate = new Date(event.target.value); // Get date from event
+    this.dayOfWeek = selectedDate.toLocaleDateString('en-US', { weekday: 'long' });
+  }
+
+  // Add a new schedule
+  addSchedule() {
+    if (this.type && this.date && this.time && this.location) {
+      const formattedDate = new Date(this.date); // Convert the string to a Date object
+      const newSchedule: Schedule = {
+        type: this.type,
+        date: formattedDate, // Save as Date object
+        time: this.time,
+        location: this.location,
+        dayOfWeek: formattedDate.toLocaleDateString('en-US', { weekday: 'long' }),
+      };
+
+      // Call the service to save the schedule
+      this.scheduleService.addSchedule(newSchedule).subscribe((data) => {
+        this.schedules.push(data); // Add the new schedule to the list
+        this.resetFields(); // Reset input fields
+      });
     }
   }
 
-  removeSchedule(index: number) {
-    this.schedules.splice(index, 1);
+  // Remove a schedule by ID
+  removeSchedule(id: string) {
+    this.scheduleService.deleteSchedule(id).subscribe(() => {
+      this.schedules = this.schedules.filter((schedule) => schedule._id !== id);
+    });
+  }
+
+  // Reset input fields after adding a schedule
+  resetFields() {
+    this.type = '';
+    this.date = '';
+    this.time = '';
+    this.location = '';
+    this.dayOfWeek = '';
   }
 }
+
 

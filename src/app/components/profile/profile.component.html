@@ -1,39 +1,51 @@
-<div class="profile-container">
-    <div class="profile-header">
-      <h2>USER PROFILE</h2>  
+<div class="profile-details">
+  <!-- View Mode -->
+  <div *ngIf="!isEditing">
+    <h2>{{ user?.firstName }} {{ user?.lastName }}</h2>
+    <p>{{ user?.communityName }}</p>
+
+    <div class="detail-item">
+      <span>Email: {{ user?.email }}</span>
     </div>
-    
-    <div class="profile-details">
-      <h2>{{user?.firstName}} {{user?.lastName}}</h2>
-      <p>{{user?.communityName}}</p>
-  
-      <div class="detail-item">
-        <span>Email: {{user?.email}}</span>
-      </div>
-      <div class="detail-item">
-        <span>Phone: {{user?.phoneNumber}}</span>
-      </div>
-      <div class="detail-item">
-        <span>Address: {{user?.address}}</span>
-      </div>
+    <div class="detail-item">
+      <span>Phone: {{ user?.phoneNumber }}</span>
     </div>
-  
-    <!-- Profile Actions -->
-    <div class="profile-actions">
-      <button (click)="editProfile()">Edit Profile</button>
-      <button (click)="goHome()">Back to Home</button>
-    </div>
-  
-    <!-- Notifications Popup -->
-    <div class="notification-popup" [style.display]="showNotifications ? 'block' : 'none'">  <!-- Use style binding instead of *ngIf -->
-      <div class="notification-header">
-        <h3>Notifications</h3>
-        <button (click)="toggleNotifications()">Close</button>
-      </div>
-      <div class="notification-content">
-        <!-- Manually display notifications using a loop in the component -->
-        <div id="notification-list"></div> <!-- Placeholder to dynamically append notifications -->
-      </div>
+    <div class="detail-item">
+      <span>Address: {{ user?.address }}</span>
     </div>
   </div>
+
+  <!-- Edit Mode -->
+  <div *ngIf="isEditing">
+    <form (ngSubmit)="saveProfile()">
+      <label for="firstName">First Name:</label>
+      <input id="firstName" [(ngModel)]="user.firstName" name="firstName" required />
+
+      <label for="lastName">Last Name:</label>
+      <input id="lastName" [(ngModel)]="user.lastName" name="lastName" required />
+
+      <label for="email">Email:</label>
+      <input id="email" [(ngModel)]="user.email" name="email" required />
+
+      <label for="phoneNumber">Phone Number:</label>
+      <input id="phoneNumber" [(ngModel)]="user.phoneNumber" name="phoneNumber" />
+
+      <label for="address">Address:</label>
+      <input id="address" [(ngModel)]="user.address" name="address" />
+
+      <label for="communityName">Community Name:</label>
+      <input id="communityName" [(ngModel)]="user.communityName" name="communityName" />
+
+      <button type="submit">Save Changes</button>
+      <button type="button" (click)="isEditing = false">Cancel</button>
+    </form>
+  </div>
+</div>
+
+<!-- Profile Actions -->
+<div class="profile-actions">
+  <button *ngIf="!isEditing" (click)="editProfile()">Edit Profile</button>
+  <button (click)="goHome()">Back to Home</button>
+</div>
+
   
