@@ -26,7 +26,6 @@ import { ProfileComponent } from '../profile/profile.component';
   styleUrls: ['./user-register.component.css'],
 })
 export class UserRegisterComponent {
-  // Base URL for the backend API
   private readonly API_BASE_URL = 'http://localhost:3000/api';
 
   // Form fields
@@ -39,8 +38,8 @@ export class UserRegisterComponent {
   password: string = '';
 
   constructor(
-    private http: HttpClient, 
-    private router: Router, 
+    private http: HttpClient,
+    private router: Router,
     private notificationService: NotificationService
   ) {}
 
@@ -48,29 +47,57 @@ export class UserRegisterComponent {
    * Handles user registration
    */
   onRegister() {
-    const userData = {
+    // Create the registration data payload
+    const registrationData = {
       firstName: this.firstName,
       lastName: this.lastName,
       email: this.email,
       address: this.address,
+      communityName: this.communityName,
       phoneNumber: this.phoneNumber,
       password: this.password,
-      role: 'user'  // Adding role identifier
     };
 
-    this.http.post<any>(`${this.API_BASE_URL}/users/register`, userData)
-      .subscribe({
-        next: (response) => {
-          console.log('Registration successful:', response);
-          this.notificationService.addNotification('Registration successful!');
-          this.router.navigate(['/user-login']);
+    // Log the registration data for debugging
+    console.log('User Registration Data:', registrationData);
+
+    // Validate required fields before making API call
+    if (!this.firstName || !this.lastName || !this.email || !this.password) {
+      const validationError = 'Please fill all required fields.';
+      alert(validationError);
+      this.notificationService.addNotification(validationError);
+      return;
+    }
+
+    // Make a POST request to register the user
+    this.http
+      .post<{ message: string; userId?: string }>(
+        `${this.API_BASE_URL}/register`,
+        registrationData
+      )
+      .subscribe(
+        (response) => {
+          console.log('API Response:', response);
+
+          if (response && response.userId) {
+            alert('Registration successful! Redirecting to your profile...');
+            this.notificationService.addNotification('Registration successful!');
+            this.router.navigate(['/profile']); // Navigate to profile on success
+          } else {
+            const errorMsg = 'Registration failed! Please check your details.';
+            alert(errorMsg);
+            this.notificationService.addNotification(errorMsg);
+          }
         },
-        error: (error) => {
+        (error) => {
+          // Handle server errors
           console.error('Registration failed:', error);
-          this.notificationService.addNotification(error.error.message || 'Registration failed');
+          alert('Registration failed due to a server error. Check the console.');
+          this.notificationService.addNotification('Server error during registration.');
         }
-      });
+      );
   }
+
   /**
    * Navigates back to the home page
    */
@@ -78,4 +105,5 @@ export class UserRegisterComponent {
     this.router.navigate(['/']); // Redirect to home
   }
 }
+
 
