@@ -48,55 +48,29 @@ export class UserRegisterComponent {
    * Handles user registration
    */
   onRegister() {
-    // Create the registration data payload
-    const registrationData = {
+    const userData = {
       firstName: this.firstName,
       lastName: this.lastName,
       email: this.email,
       address: this.address,
-      communityName: this.communityName,
       phoneNumber: this.phoneNumber,
       password: this.password,
+      role: 'user'  // Adding role identifier
     };
 
-    // Validate required fields before making API call
-    if (!this.firstName || !this.lastName || !this.email || !this.password) {
-      const validationError = 'Please fill all required fields.';
-      alert(validationError);
-      this.notificationService.addNotification(validationError);
-      return;
-    }
-
-    // Make a POST request to register the user
-    this.http
-      .post<{ message: string; userId?: string }>(
-        `${this.API_BASE_URL}/register`,
-        registrationData
-      )
-      .subscribe(
-        (response) => {
-          console.log('API Response:', response);
-
-          if (response && response.userId) {
-            alert('Registration successful! Redirecting to your profile...');
-            this.notificationService.addNotification('Registration successful!');
-            this.router.navigate(['/profile']); // Navigate to profile on success
-          } else {
-            const errorMsg = 'Registration failed! Please check your details.';
-            alert(errorMsg);
-            this.notificationService.addNotification(errorMsg);
-          }
+    this.http.post<any>(`${this.API_BASE_URL}/users/register`, userData)
+      .subscribe({
+        next: (response) => {
+          console.log('Registration successful:', response);
+          this.notificationService.addNotification('Registration successful!');
+          this.router.navigate(['/user-login']);
         },
-        (error) => {
-          // Handle server errors
-          const serverError = 'Registration failed due to a server error.';
+        error: (error) => {
           console.error('Registration failed:', error);
-          alert(serverError);
-          this.notificationService.addNotification(serverError);
+          this.notificationService.addNotification(error.error.message || 'Registration failed');
         }
-      );
+      });
   }
-
   /**
    * Navigates back to the home page
    */

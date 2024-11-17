@@ -5,15 +5,15 @@ const mongoose = require("mongoose");
 
 // Import routes
 const userRoutes = require("./routes/users");
-const reportRoutes = require("./routes/report");
+const reportRoutes = require("./routes/reports");
 const notificationRoutes = require("./routes/notifications");
-const adminRoutes = require("./routes/admin");
+const adminRoutes = require("./routes/admins");
 
 const app = express();
 
 // MongoDB connection
 mongoose
-  .connect(process.env.MONGO_URI || "your-mongo-db-uri", {
+  .connect(process.env.MONGO_URI || "mongodb+srv://sukesh:PMasQ9sWWNzejBgV@greentech.1mzrd.mongodb.net/", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

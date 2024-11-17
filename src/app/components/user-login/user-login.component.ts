@@ -31,32 +31,24 @@ export class UserLoginComponent {
     ) {}
   
     onLogin() {
-        if (this.email && this.password) {
-          const loginData = { email: this.email, password: this.password };
-  
-          this.http.post<{ message: string; userId?: string; token?: string }>(`${this.API_BASE_URL}/api/login`, loginData)
-            .subscribe(response => {
-              console.log(response.message);
-              
-              if (response.userId && response.token) {
-                localStorage.setItem('authToken', response.token);
-                this.router.navigate(['/role-selection']);
-              } else { 
-                const failMessage = 'Login Failed! Please Check Your Credentials!';
-                alert(failMessage);
-                this.notificationService.addNotification(failMessage);
-              }
-            }, error => {
-              const serverErrorMessage = 'Login Failed Due To Server Error!';
-              alert(serverErrorMessage);
-              this.notificationService.addNotification(serverErrorMessage);
-            });
-        } else {
-          const missingFieldsMessage = 'Please Enter Both Email and Password!';
-          alert(missingFieldsMessage);
-          this.notificationService.addNotification(missingFieldsMessage);
-        }
-      }
+      const loginData = {
+        email: this.email,
+        password: this.password
+      };
+    
+      this.http.post(`${this.API_BASE_URL}/users/login`, loginData)
+        .subscribe({
+          next: (response: any) => {
+            localStorage.setItem('token', response.token);
+            this.router.navigate(['/home']);
+            this.notificationService.addNotification('Login successful!');
+          },
+          error: (error) => {
+            console.error('Login failed:', error);
+            this.notificationService.addNotification('Login failed. Please check your credentials.');
+          }
+        });
+    }
   
       goHome() {
         this.router.navigate(['/']);

@@ -10,7 +10,12 @@ import { RouterModule } from '@angular/router'; // Keep your original imports
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [UserRegisterComponent, RouterModule, FormsModule], // Add FormsModule to imports
+  imports: [
+    CommonModule,
+    UserRegisterComponent,
+    RouterModule,
+    FormsModule
+  ],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })

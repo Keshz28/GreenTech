@@ -1,7 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const router = express.Router();
-const Report = require("../models/report");
+const Report = require("../models/reports");
 
 // Configure Multer for file uploads
 const upload = multer({ dest: "uploads/" }); // Files are saved in the "uploads" folder
