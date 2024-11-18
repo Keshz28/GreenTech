@@ -18,38 +18,36 @@ import { NotificationService } from '../../services/notification.service';
 })
 
 export class UserLoginComponent {
+        private readonly API_BASE_URL = 'http://localhost:3000/api';  // Update the API endpoint to include /api prefix
   
-    private readonly API_BASE_URL = 'http://localhost:3000';  // Define base URL here
-  
-    email: string = '';
-    password: string = '';
-  
-    constructor(
-      private http: HttpClient,
-      private router: Router,
-      private notificationService: NotificationService 
-    ) {}
-  
-    onLogin() {
-      const loginData = {
-        email: this.email,
-        password: this.password
-      };
-    
-      this.http.post(`${this.API_BASE_URL}/users/login`, loginData)
-        .subscribe({
-          next: (response: any) => {
-            localStorage.setItem('token', response.token);
-            this.router.navigate(['/home']);
-            this.notificationService.addNotification('Login successful!');
-          },
-          error: (error) => {
-            console.error('Login failed:', error);
-            this.notificationService.addNotification('Login failed. Please check your credentials.');
-          }
-        });
-    }
-  
+        email: string = '';
+        password: string = '';
+
+        constructor(
+          private http: HttpClient,
+          private router: Router,
+          private notificationService: NotificationService 
+        ) {}
+
+        onLogin() {
+          const loginData = {
+            email: this.email.trim(),
+            password: this.password
+          };
+
+          this.http.post<any>(`${this.API_BASE_URL}/users/login`, loginData)
+            .subscribe({
+              next: (response) => {
+                console.log('Login successful:', response);
+                this.notificationService.addNotification('Login successful!');
+                this.router.navigate(['/dashboard']);
+              },
+              error: (error) => {
+                console.error('Login failed:', error);
+                this.notificationService.addNotification('Invalid email or password');
+              }
+            });
+        }
       goHome() {
         this.router.navigate(['/']);
       }

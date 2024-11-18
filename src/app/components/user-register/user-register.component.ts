@@ -48,16 +48,28 @@ export class UserRegisterComponent {
    * Handles user registration
    */
   onRegister() {
+    // Add form validation before submission
+    if (!this.validateForm()) {
+      this.notificationService.addNotification('Please fill all required fields');
+      return;
+    }
+  
+    // Validate email format
+    if (!this.isValidEmail(this.email)) {
+      this.notificationService.addNotification('Invalid email format');
+      return;
+    }
+  
     const userData = {
-      firstName: this.firstName,
-      lastName: this.lastName,
-      email: this.email,
-      address: this.address,
-      phoneNumber: this.phoneNumber,
+      firstName: this.firstName.trim(),
+      lastName: this.lastName.trim(),
+      email: this.email.trim().toLowerCase(),
+      address: this.address.trim(),
+      phoneNumber: this.phoneNumber.trim(),
       password: this.password,
-      role: 'user'  // Adding role identifier
+      role: 'user'
     };
-
+  
     this.http.post<any>(`${this.API_BASE_URL}/users/register`, userData)
       .subscribe({
         next: (response) => {
@@ -67,10 +79,28 @@ export class UserRegisterComponent {
         },
         error: (error) => {
           console.error('Registration failed:', error);
-          this.notificationService.addNotification(error.error.message || 'Registration failed');
+          const errorMessage = error.error?.message || 'Registration failed. Please try again.';
+          this.notificationService.addNotification(errorMessage);
         }
       });
   }
+  
+  validateForm(): boolean {
+    return !!(
+      this.firstName?.trim() && 
+      this.lastName?.trim() && 
+      this.email?.trim() && 
+      this.password &&
+      this.password.length >= 6
+    );
+  }
+  
+  isValidEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email?.trim());
+  }
+  
+  
   /**
    * Navigates back to the home page
    */
