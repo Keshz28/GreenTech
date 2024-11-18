@@ -9,10 +9,10 @@ const upload = multer({ dest: "uploads/" }); // Files are saved in the "uploads"
 // POST: Create a new report
 router.post("/", upload.single("photo"), async (req, res) => {
   const { issueType, location, description, userId } = req.body;
-
-  if (!issueType || !location || !description) {
-    return res.status(400).json({ message: "All fields are required." });
-  }
+  
+  // Log incoming request data
+  console.log('Received report data:', req.body);
+  console.log('Received file:', req.file);
 
   try {
     const newReport = new Report({
@@ -20,13 +20,22 @@ router.post("/", upload.single("photo"), async (req, res) => {
       location,
       description,
       photo: req.file ? req.file.path : null,
-      userId,
+      userId
     });
 
     const savedReport = await newReport.save();
-    res.status(201).json({ message: "Report created successfully!", report: savedReport });
+    console.log('Report saved successfully:', savedReport);
+    
+    res.status(201).json({ 
+      message: "Report created successfully!", 
+      report: savedReport 
+    });
   } catch (error) {
-    res.status(500).json({ message: "Error creating report.", error: error.message });
+    console.error('Error details:', error);
+    res.status(500).json({ 
+      message: "Error creating report.", 
+      error: error.message 
+    });
   }
 });
 

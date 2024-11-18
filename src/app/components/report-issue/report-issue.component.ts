@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http'; // Import HttpClient
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,47 +15,51 @@ export class ReportIssueComponent {
     community: '',
     issueType: '',
     description: '',
-    image: null
+    image: null as File | null
   };
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  onSubmit() {
-    // Validate required fields
-    if (!this.report.community.trim() || this.report.description.trim().length < 30) {
-      alert('Information not been filled! Please fill out all required fields.');
+  onSubmit(): void {
+    const userString = localStorage.getItem('user');
+    const user = userString ? JSON.parse(userString) : null;
+  
+    if (!this.report.community || !this.report.description) {
+      alert('Please fill out all required fields');
       return;
     }
-
-    // Prepare payload
+  
     const formData = new FormData();
-    formData.append('community', this.report.community);
-    formData.append('issueType', this.report.issueType || 'Not Specified'); // Optional
+    formData.append('location', this.report.community);  // Changed from 'community' to 'location'
+    formData.append('issueType', this.report.issueType || 'Not Specified');
     formData.append('description', this.report.description);
-    if (this.report.image) {
-      formData.append('image', this.report.image);
+    
+    if (user?._id) {
+      formData.append('userId', user._id);
     }
-
-    // Send report to the backend
-    this.http.post('http://localhost:3000/api/reports', formData).subscribe(
-      (response: any) => {
+  
+    if (this.report.image) {
+      formData.append('photo', this.report.image);  // Changed from 'image' to 'photo'
+    }
+  
+    this.http.post('http://localhost:3000/api/reports', formData).subscribe({
+      next: (response) => {
         alert('Report submitted successfully!');
         this.resetForm();
-        console.log('Response from backend:', response);
       },
-      (error) => {
-        alert('Failed to submit report. Please try again.');
-        console.error('Error:', error);
+      error: (error) => {
+        console.error('Full error details:', error);
+        alert(error.error?.message || 'Failed to submit report');
       }
-    );
+    });  
+  }  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.report.image = input.files[0];
+    }
   }
 
-  // Handle image file selection
-  onFileSelected(event: any) {
-    this.report.image = event.target.files[0];
-  }
-
-  resetForm() {
+  resetForm(): void {
     this.report = {
       community: '',
       issueType: '',
@@ -64,7 +68,7 @@ export class ReportIssueComponent {
     };
   }
 
-  goBackHome() {
+  goBackHome(): void {
     this.router.navigate(['/']);
   }
 }
