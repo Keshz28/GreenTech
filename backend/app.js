@@ -8,13 +8,20 @@ const userRoutes = require("./routes/users");
 const reportRoutes = require("./routes/reports");
 const notificationRoutes = require("./routes/notifications");
 const adminRoutes = require("./routes/admins");
-const scheduleRoutes = require("./routes/schedules");
+const scheduleRoutes = require("./routes/schedule");
 
 const app = express();
 
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
+
 // MongoDB connection
 mongoose
-  .connect(process.env.MONGO_URI || "mongodb+srv://sukesh:PMasQ9sWWNzejBgV@greentech.1mzrd.mongodb.net/", {
+  .connect(process.env.MONGO_URI || "mongodb+srv://sukesh:PMasQ9sWWNzejBgV@greentech.1mzrd.mongodb.net/GreenTech?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
