@@ -1,172 +1,142 @@
-/* Overall Page Styling */
-.page-container {
-    font-family: 'Arial', sans-serif;  /* Consistent font */
-    background-color: #fff;            /* Pure white background */
+/* General Styles */
+.generate-reports {
+    font-family: Arial, sans-serif;
     padding: 20px;
-}
-
-/* Page Header Styling */
-.page-header h2 {
-    background-color: #2e7d32;         /* Dark green for header */
+    background-color: #f2f2f2;
+  }
+  
+  /* Header */
+  .header {
+    background-color: #1e7d35;
     color: white;
     padding: 15px;
-    border-radius: 5px;
-    display: inline-block;
-    font-size: 24px;
-}
-
-/* Report Selection Dropdown */
-.report-selection select {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    background-color: #b8e6b9;         /* Light green background */
-    color: #2e7d32;                    /* Dark green text */
-    appearance: none;                  /* Remove default arrow */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%232e7d32' d='M2 0L0 2h4z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 10px top 50%;
-    background-size: 12px;
-}
-
-.report-selection {
-    margin: 20px 0;
-}
-
-/* Summary Section */
-.summary-box {
-    display: flex;
-    justify-content: space-between;
-    background-color: #b8e6b9;    /* Light green background */
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.summary-item {
     text-align: center;
-    width: 30%;
-}
-
-.summary-item h3 {
-    margin-bottom: 10px;
-    color: #2e7d32;               /* Dark green for the heading text */
-}
-
-.summary-item p {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;                  /* Darker text color for contrast */
-}
-
-/* Flexbox layout for Pickup History and Recycling Statistics */
-.report-columns {
+    border-radius: 5px;
+  }
+  
+  .header h1 {
+    margin: 0;
+  }
+  
+  /* Summary Section */
+  .summary-section {
     display: flex;
-    justify-content: space-between;   /* Spread out the columns */
-    gap: 20px;                        /* Space between the two columns */
-    margin-top: 20px;
-}
-
-/* Report Cards Styling */
-.report-card {
-    flex: 1;                          /* Allows the cards to grow and shrink equally */
-    background-color: #b8e6b9;        /* Light green background */
-    border: 1px solid #ccc;           /* Subtle card border */
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  /* Soft shadow */
-    transition: transform 0.2s ease-in-out;
-}
-
-.report-card:hover {
-    transform: translateY(-5px);        /* Lift effect on hover */
-}
-
-.report-card h3 {
-    color: #2e7d32;                     /* Green for headings */
-}
-
-.report-card p {
-    color: #555;
-}
-
-/* Pickup History Table */
-.pickup-table {
+    justify-content: space-around;
+    margin: 20px 0;
+    background-color: #dfffe2;
+    padding: 15px;
+    border-radius: 5px;
+  }
+  
+  .summary-item {
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  .summary-item h2 {
+    margin: 10px 0 0;
+    color: #1e7d35;
+  }
+  
+  /* Tab Section */
+  .tab-section {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+  }
+  
+  .tab-button {
+    padding: 10px 20px;
+    background-color: #1e7d35;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .tab-button.active {
+    background-color: #145a27;
+  }
+  
+  .tab-button:hover {
+    background-color: #145a27;
+  }
+  
+  /* Content Section */
+  .content-section {
+    display: flex;
+    gap: 20px;
+  }
+  
+  /* Pickup History Section */
+  .pickup-history {
+    flex: 1;
+    background-color: #e8f5e9;
+    padding: 15px;
+    border-radius: 5px;
+  }
+  
+  .history-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.pickup-table th, .pickup-table td {
-    padding: 12px;
-    border: 1px solid #ddd;
+    margin-top: 10px;
+  }
+  
+  .history-table th, .history-table td {
+    padding: 10px;
     text-align: left;
-}
-
-.pickup-table th {
-    background-color: #4caf50;
+  }
+  
+  .history-table th {
+    background-color: #1e7d35;
+    color: white;
+  }
+  
+  .history-table td:nth-child(odd) {
+    background-color: #dfffe2;
+  }
+  
+  /* Recycling Statistics Section */
+  .recycling-statistics {
+    flex: 1;
+    background-color: #e8f5e9;
+    padding: 15px;
+    border-radius: 5px;
+  }
+  
+  .statistics-bar {
+    margin-top: 10px;
+  }
+  
+  .bar {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 5px;
     color: white;
     font-weight: bold;
-}
-
-.pickup-table tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-.pickup-table tr:hover {
-    background-color: #ddd;
-}
-
-.pickup-table td {
-    color: #555;
-}
-
-/* Chart Styling */
-.chart-container {
-    margin-top: 10px;
-}
-
-.chart-bar {
-    width: 100%;
-    margin: 5px 0;
-    color: white;
-    padding: 5px 10px;
-    text-align: left;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-}
-
-/* Same color scheme for charts */
-.chart-bar:nth-child(1) { background-color: #4caf50; }
-.chart-bar:nth-child(2) { background-color: #2196f3; }
-.chart-bar:nth-child(3) { background-color: #ff9800; }
-.chart-bar:nth-child(4) { background-color: #e91e63; }
-.chart-bar:nth-child(5) { background-color: #9c27b0; }
-
-/* Button Alignment */
-.back-button-container {
-    display: flex;
-    justify-content: center;       /* Center the button */
-    margin-top: 20px;              /* Space above the button */
-}
-
-.back-home-btn {
-    background-color: #2e7d32;     /* Dark green background */
-    color: white;                  /* White text */
-    padding: 10px 20px;            /* Padding for the button */
-    border: none;                  /* Remove default borders */
-    border-radius: 8px;            /* Rounded corners */
-    font-size: 16px;               /* Adjust the font size */
-    cursor: pointer;               /* Pointer cursor on hover */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Subtle shadow */
-    transition: background-color 0.3s ease-in-out;
-}
-
+  }
+  
+  .bar.plastic {
+    background-color: #4caf50;
+  }
+  
+  .bar.glass {
+    background-color: #2196f3;
+  }
+  
+  .bar.metal {
+    background-color: #ff9800;
+  }
+  
+  .bar.paper {
+    background-color: #e91e63;
+  }
+  
+  .bar.others {
+    background-color: #9c27b0;
+  }
+  
 .back-home-btn:hover {
     background-color: #1b5e20;     /* Slightly darker green on hover */
 }

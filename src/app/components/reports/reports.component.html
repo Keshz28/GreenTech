@@ -1,89 +1,64 @@
-<div class="page-container">
-  <!-- Page Header -->
-  <div class="page-header">
-    <h2><i class="fas fa-chart-bar"></i> Generate Reports</h2>
+<div class="generate-reports">
+  <!-- Header -->
+  <div class="header">
+    <h1>Generate Reports</h1>
   </div>
 
-  <!-- Key Insights Summary -->
-  <div class="summary-box">
+  <!-- Summary Section -->
+  <div class="summary-section">
     <div class="summary-item">
-      <h3>Total Pickups</h3>
-      <p>{{ totalPickups }}</p>
+      <p>Total Pickups</p>
+      <h2>{{ totalPickups }}</h2>
     </div>
     <div class="summary-item">
-      <h3>Top Waste Type</h3>
-      <p>{{ topWasteType }}</p>
+      <p>Top Waste Type</p>
+      <h2>{{ topWasteType }}</h2>
     </div>
     <div class="summary-item">
-      <h3>Top Community</h3>
-      <p>{{ topCommunity }}</p>
+      <p>Top Community</p>
+      <h2>{{ topCommunity }}</h2>
     </div>
   </div>
 
-  <!-- Report Selection Dropdown -->
-  <div class="report-selection">
-    <select>
-      <option value="pickup-history">Pickup History</option>
-      <option value="recycling-stats">Recycling Statistics</option>
-      <option value="issue-reports">Issue Reports</option>
-    </select>
+  <!-- Tab Section -->
+  <div class="tab-section">
+    <button class="tab-button active">Pickup History</button>
   </div>
 
-  <!-- Report Columns for Pickup History and Recycling Statistics -->
-  <div class="report-columns">
-    
-    <!-- Pickup History Card with Table -->
-    <div class="report-card">
+  <!-- Content Section -->
+  <div class="content-section">
+    <!-- Pickup History -->
+    <div class="pickup-history">
       <h3>Pickup History</h3>
       <p>Details of past pickups.</p>
-      <table class="pickup-table">
+      <table class="history-table">
         <thead>
           <tr>
-            <th>Name</th>
+            <th>ID</th>
             <th>Community</th>
             <th>Waste Type</th>
           </tr>
         </thead>
         <tbody>
-          <!-- Static Entries -->
-          <tr>
-            <td>John Doe</td>
-            <td>Subang Bestari</td>
-            <td>Plastic</td>
-          </tr>
-          <tr>
-            <td>Jane Smith</td>
-            <td>Subang Bestari</td>
-            <td>Metal</td>
-          </tr>
-
-          <!-- Dynamic Entries -->
-          <tr *ngFor="let report of submittedReports">
-            <td>{{ report.name }}</td>
-            <td>{{ report.community }}</td>
-            <td>{{ report.wasteType }}</td>
+          <tr *ngFor="let schedule of schedules">
+            <!-- Display the schedule ID -->
+            <td>{{ schedule._id }}</td>
+            <td>{{ schedule.location }}</td>
+            <td>{{ schedule.type }}</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <!-- Recycling Statistics Card -->
-    <div class="report-card">
+    <!-- Recycling Statistics -->
+    <div class="recycling-statistics">
       <h3>Recycling Statistics</h3>
       <p>Statistics on recycling rates and trends.</p>
-      <div class="chart-container">
-        <div class="chart-bar" style="height: 60%;">Plastic</div>
-        <div class="chart-bar" style="height: 40%;">Glass</div>
-        <div class="chart-bar" style="height: 30%;">Metal</div>
-        <div class="chart-bar" style="height: 50%;">Paper</div>
-        <div class="chart-bar" style="height: 70%;">Others</div>
+      <div class="statistics-bar" *ngFor="let stat of recyclingStats">
+        <div class="bar" [ngClass]="stat.type.toLowerCase()">
+          {{ stat.type }}: {{ stat.count }} pick-ups
+        </div>
       </div>
     </div>
-
-  </div> <!-- End of report-columns -->
-
-  <!-- Back to Home Button -->
-  <div class="back-button-container">
-    <button (click)="goBackHome()" class="back-home-btn">Back to Home</button>
   </div>
 </div>
