@@ -7,7 +7,8 @@ const Notification = require("../models/notification"); // For creating notifica
 // Secret key for JWT (use environment variables for production)
 const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret_key";
 
-router.post("/register", async (req, res) => {
+// User Registration
+router.post("/user-register", async (req, res) => {
   const { firstName, lastName, email, password, address, communityName, phoneNumber } = req.body;
 
   try {
@@ -53,9 +54,8 @@ router.post("/register", async (req, res) => {
   }
 });
 
-
 // User Login
-router.post("/login", async (req, res) => {
+router.post("/user-login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
