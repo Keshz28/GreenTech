@@ -8,22 +8,15 @@ const Notification = require("../models/notification"); // For creating notifica
 const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret_key";
 
 // User Registration
-router.post("/user-register", async (req, res) => {
+router.post("/register", async (req, res) => {
   const { firstName, lastName, email, password, address, communityName, phoneNumber } = req.body;
 
   try {
-    // Validate payload presence
-    if (!firstName || !lastName || !email || !password) {
-      return res.status(400).json({ error: "Missing required fields." });
-    }
-
-    // Check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ error: "User already exists with this email." });
     }
 
-    // Create and save new user
     const newUser = new User({
       firstName,
       lastName,
@@ -35,27 +28,14 @@ router.post("/user-register", async (req, res) => {
     });
     await newUser.save();
 
-    // Create a "Welcome" notification
-    const welcomeNotification = new Notification({
-      title: "Welcome to GreenTech!",
-      message: `Hello ${firstName}, your account has been successfully created!`,
-      userId: newUser._id,
-    });
-    await welcomeNotification.save();
-
     res.status(201).json({ message: "User registered successfully!", userId: newUser._id });
   } catch (error) {
-    // Enhanced error handling
-    if (error.name === "ValidationError") {
-      const errors = Object.values(error.errors).map(err => err.message);
-      return res.status(400).json({ error: errors.join(", ") });
-    }
     res.status(500).json({ error: "Error registering user: " + error.message });
   }
 });
 
 // User Login
-router.post("/user-login", async (req, res) => {
+router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
