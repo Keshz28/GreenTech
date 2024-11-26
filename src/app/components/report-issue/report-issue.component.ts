@@ -52,10 +52,23 @@ export class ReportIssueComponent {
         alert(error.error?.message || 'Failed to submit report');
       }
     });  
-  }  onFileSelected(event: Event): void {
+  }  
+
+  onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
-      this.report.image = input.files[0];
+      const selectedFile = input.files[0];
+      const fileType = selectedFile.type;
+
+      //To validate the images to be in either jpeg or png format
+
+      if (fileType === 'image/jpeg' || fileType === 'image/png') {
+        this.report.image = selectedFile;
+      } else {
+        alert('Invalid file type. Please select a valid image file (JPEG or PNG)');
+        this.report.image = null; //Reset the image field if field
+        input.value = ' ';
+      }
     }
   }
 

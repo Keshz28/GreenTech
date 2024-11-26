@@ -2,9 +2,35 @@ const express = require("express");
 const multer = require("multer");
 const router = express.Router();
 const Report = require("../models/reports");
+const path = require("path");
 
-// Configure Multer for file uploads
-const upload = multer({ dest: "uploads/" }); // Files are saved in the "uploads" folder
+//Configure Multer for file uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/");
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  }
+});
+
+//File filter to accept the sent file must only be PNG or JPEG files
+const fileFilter = (req, file, cb) => {
+  const allowedType = ['image/png', 'image/jpeg'];
+  if (allowedTypes.includes(file.mimetype)){
+    cb(null, true);
+  } else {
+    cb(new Error('Invalid file type. Images to be sent in PNG and JPG files only!'))
+  }
+}
+
+const upload = multer({
+  storage,
+  fileFilter,
+  limits: {
+    fileSize: 1024 * 1024 * 5 // 5MB
+  }
+});
 
 // POST: Create a new report
 router.post("/", upload.single("photo"), async (req, res) => {
