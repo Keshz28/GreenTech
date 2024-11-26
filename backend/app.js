@@ -8,6 +8,7 @@ const userRoutes = require("./routes/users");
 const reportRoutes = require("./routes/reports");
 const notificationRoutes = require("./routes/notifications");
 const adminRoutes = require("./routes/admins");
+const scheduleRoutes = require("./routes/schedules");
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/reports", reportRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/schedules", scheduleRoutes);
 
 // Static folder for uploads
 app.use("/uploads", express.static("uploads"));
