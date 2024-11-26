@@ -35,7 +35,7 @@ export class UserLoginComponent {
             password: this.password
           };
 
-          this.http.post<any>(`${this.API_BASE_URL}/users/login`, loginData)
+          this.http.post<any>(`${this.API_BASE_URL}/users/login`, loginData)  // Changed from "/users/login"
             .subscribe({
               next: (response) => {
                 console.log('Login successful:', response);
