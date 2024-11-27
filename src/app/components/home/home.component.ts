@@ -12,13 +12,14 @@ import { AdminRegisterComponent } from '../admin-register/admin-register.compone
 import { ReportIssueComponent } from '../report-issue/report-issue.component';
 import { ScheduleComponent } from '../schedule/schedule.component';
 import { AdminProfileComponent } from '../admin-profile/admin-profile.component';
-import { DashboardLayoutComponent } from '../dashboard-layout/dashboard-layout.component';
+
+
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterModule, CommonModule, AdminLoginComponent, UserLoginComponent, RoleSelectionComponent, ReportsComponent, UserRegisterComponent, AdminRegisterComponent, ReportIssueComponent, ScheduleComponent, AdminProfileComponent, DashboardLayoutComponent],
+  imports: [RouterModule, CommonModule, AdminLoginComponent, UserLoginComponent, RoleSelectionComponent, ReportsComponent, UserRegisterComponent, AdminRegisterComponent, ReportIssueComponent, ScheduleComponent, AdminProfileComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

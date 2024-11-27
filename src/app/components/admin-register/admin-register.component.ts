@@ -65,7 +65,7 @@ export class AdminRegisterComponent {
           if (response.adminId) {
             alert('Registration successful!');
             this.notificationService.addNotification('Admin registered successfully!');
-            this.router.navigate(['/admin-dashboard']);
+            this.router.navigate(['/admin-login']);
           } else {
             const failMsg = 'Registration Failed!!! An Accounting Error Had Been Occurred!';
             alert(failMsg);

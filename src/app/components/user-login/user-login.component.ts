@@ -40,7 +40,7 @@ export class UserLoginComponent {
               next: (response) => {
                 console.log('Login successful:', response);
                 this.notificationService.addNotification('Login successful!');
-                this.router.navigate(['/dashboard']);
+                this.router.navigate(['/home']);
               },
               error: (error) => {
                 console.error('Login failed:', error);
